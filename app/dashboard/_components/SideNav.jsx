@@ -1,4 +1,6 @@
 "use client";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import {
   DiamondPlus,
   Library,
@@ -39,6 +41,18 @@ function SideNav() {
             {m.name}
           </h2>
         ))}
+      </div>
+      <div className="fixed bottom-7 p-6 w-64">
+        <Button className="w-full">Create Form</Button>
+        <div className="my-5">
+          <Progress value={33} />
+          <h2 className="text-sm mt-2 text-gray-600">
+            <strong>2 </strong>Out of <strong>3</strong> File Created
+          </h2>
+          <h2 className="text-sm mt-2 text-gray-600">
+            Upgrade to Pro for unlimited AI Form
+          </h2>
+        </div>
       </div>
     </div>
   );
