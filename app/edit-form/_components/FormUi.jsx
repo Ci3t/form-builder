@@ -1,5 +1,15 @@
 import { Input } from "@/components/ui/input";
-import React from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 function FormUi({ jsonform }) {
   return (
@@ -13,12 +23,55 @@ function FormUi({ jsonform }) {
 
       {jsonform?.formFields?.map((field, i) => (
         <div key={i}>
-          <label className="text-sm text-gray-500 ">{field?.label}</label>
-          <Input
-            type={field?.fieldType}
-            placeholder={field?.placeholder}
-            name={field?.fieldName}
-          />
+          {field.fieldType == "select" ? (
+            <div>
+              <label className="text-sm text-gray-500 ">{field?.label}</label>
+              <Select>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder={field.placeholder} />
+                </SelectTrigger>
+                <SelectContent>
+                  {field.options.map((option, i) => (
+                    <SelectItem key={i} value={option}>
+                      {option}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          ) : field.fieldType == "radio" ? (
+            <div>
+              <label className="text-sm text-gray-500 ">{field?.label}</label>
+              <RadioGroup>
+                {field.options?.map((option, i) => (
+                  <div key={i} className="flex items-center space-x-2">
+                    <RadioGroupItem value={option} id={option} />
+                    <Label htmlFor={option}>{option}</Label>
+                  </div>
+                ))}
+              </RadioGroup>
+            </div>
+          ) : field.fieldType == "checkbox" ? (
+            <div>
+              <label>{field.label}</label>
+
+              {field?.options?.map((option, i) => (
+                <div>
+                  <h2>{option}</h2>
+                  <Checkbox />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="my-3">
+              <label className="text-sm text-gray-500 ">{field?.label}</label>
+              <Input
+                type={field?.fieldType}
+                placeholder={field?.placeholder}
+                name={field?.fieldName}
+              />
+            </div>
+          )}
         </div>
       ))}
     </div>

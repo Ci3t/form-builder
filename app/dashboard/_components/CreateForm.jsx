@@ -26,7 +26,7 @@ const CreateForm = () => {
   const route = useRouter();
 
   const PROMPT =
-    ", On the basis of the description please give form in json format with form title,form subheading with form having form field,form name,placeholder name,and form label,fieldType,field required in Json format";
+    ", On the basis of the description please give form in json format with form title,form subheading with form having form field,form name,placeholder name,and form label,fieldType,field required in Json format also keep the json format in this order the formFields as array,formSubheading as string,formTitle as string inside the formfields objects key names are fieldName,fieldType,label,placeholder,required,options and keep options as an array with the value dont add a label inside";
   const onCreateForm = async () => {
     setLoading(true);
     const result = await AiChatSession.sendMessage(
