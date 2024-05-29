@@ -13,7 +13,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 function FormUi({ jsonform }) {
   return (
-    <div className="my-3 border p-5 md:w-[600px]">
+    <div className="my-3 border p-5 md:w-[600px] rounded-lg">
       <h2 className="font-bold text-center text-2xl text-primary">
         {jsonform?.formTitle}
       </h2>
@@ -52,15 +52,22 @@ function FormUi({ jsonform }) {
               </RadioGroup>
             </div>
           ) : field.fieldType == "checkbox" ? (
-            <div>
-              <label>{field.label}</label>
+            <div className="my-3">
+              <label className="text-sm text-gray-500 ">{field.label}</label>
 
-              {field?.options?.map((option, i) => (
-                <div>
-                  <h2>{option}</h2>
+              {field?.options ? (
+                field?.options?.map((option, i) => (
+                  <div className="flex gap-2 items-center">
+                    <Checkbox />
+                    <h2>{option}</h2>
+                  </div>
+                ))
+              ) : (
+                <div className="flex gap-2 items-center">
                   <Checkbox />
+                  <h2>{field.label}</h2>
                 </div>
-              ))}
+              )}
             </div>
           ) : (
             <div className="my-3">
