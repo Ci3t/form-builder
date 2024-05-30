@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 function EditField({ defaultValue, onUpdate }) {
   const [label, setLabel] = useState(defaultValue?.label);
   const [placeholder, setPlaceholder] = useState(defaultValue?.placeholder);
+  console.log(defaultValue);
   return (
     <div className="flex gap-2">
       <Popover>
