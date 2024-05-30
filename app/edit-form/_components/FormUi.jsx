@@ -10,8 +10,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import EditField from "./EditField";
 
-function FormUi({ jsonform }) {
+function FormUi({ jsonform, onFieldUpdate }) {
   return (
     <div className="my-3 border p-5 md:w-[600px] rounded-lg">
       <h2 className="font-bold text-center text-2xl text-primary">
@@ -22,9 +23,9 @@ function FormUi({ jsonform }) {
       </h2>
 
       {jsonform?.formFields?.map((field, i) => (
-        <div key={i}>
+        <div key={i} className="flex items-center gap-2">
           {field.fieldType == "select" ? (
-            <div>
+            <div className="my-3 w-full">
               <label className="text-sm text-gray-500 ">{field?.label}</label>
               <Select>
                 <SelectTrigger className="w-full">
@@ -40,7 +41,7 @@ function FormUi({ jsonform }) {
               </Select>
             </div>
           ) : field.fieldType == "radio" ? (
-            <div>
+            <div className="my-3 w-full">
               <label className="text-sm text-gray-500 ">{field?.label}</label>
               <RadioGroup>
                 {field.options?.map((option, i) => (
@@ -52,12 +53,12 @@ function FormUi({ jsonform }) {
               </RadioGroup>
             </div>
           ) : field.fieldType == "checkbox" ? (
-            <div className="my-3">
+            <div className="my-3 w-full">
               <label className="text-sm text-gray-500 ">{field.label}</label>
 
               {field?.options ? (
                 field?.options?.map((option, i) => (
-                  <div className="flex gap-2 items-center">
+                  <div key={i} className="flex gap-2 items-center">
                     <Checkbox />
                     <h2>{option}</h2>
                   </div>
@@ -70,7 +71,7 @@ function FormUi({ jsonform }) {
               )}
             </div>
           ) : (
-            <div className="my-3">
+            <div className="my-3 w-full">
               <label className="text-sm text-gray-500 ">{field?.label}</label>
               <Input
                 type={field?.fieldType}
@@ -79,6 +80,12 @@ function FormUi({ jsonform }) {
               />
             </div>
           )}
+          <div>
+            <EditField
+              defaultValue={field}
+              onUpdate={(value) => onFieldUpdate(value, i)}
+            />
+          </div>
         </div>
       ))}
     </div>

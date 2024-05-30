@@ -12,6 +12,7 @@ import FormUi from "../_components/FormUi";
 function EditForm({ params }) {
   const { user } = useUser();
   const [jsonForm, setJsonForm] = useState([]);
+  const [updateTrigger, setUpdateTrigger] = useState([]);
   const router = useRouter();
 
   const getFormData = async () => {
@@ -27,7 +28,14 @@ function EditForm({ params }) {
     console.log(JSON.parse(res[0].jsonform));
     setJsonForm(JSON.parse(res[0].jsonform));
   };
-
+  const onFieldUpdate = (value, i) => {
+    jsonForm.formFields[i].label = value.label;
+    jsonForm.formFields[i].placeholder = value.placeholder;
+    setUpdateTrigger(Date.now());
+  };
+  useEffect(() => {
+    setJsonForm(jsonForm);
+  }, [updateTrigger]);
   useEffect(() => {
     user && getFormData();
   }, [user]);
@@ -43,7 +51,7 @@ function EditForm({ params }) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <div className="p-5 border rounded-lg shadow-sm ">Controller</div>
         <div className="md:col-span-2 border rounded-lg  p-5 flex items-center justify-center">
-          <FormUi jsonform={jsonForm} />
+          <FormUi jsonform={jsonForm} onFieldUpdate={onFieldUpdate} />
         </div>
       </div>
     </div>
