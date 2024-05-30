@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import FormUi from "../_components/FormUi";
 import { json } from "drizzle-orm/mysql-core";
+import { toast } from "sonner";
 
 function EditForm({ params }) {
   const { user } = useUser();
@@ -59,8 +60,12 @@ function EditForm({ params }) {
           eq(JsonForms.createdBy, user?.primaryEmailAddress?.emailAddress)
         )
       );
-
-    console.log(res);
+    toast("Field Updated!!!");
+  };
+  const deleteField = (indexToRemove) => {
+    const res = jsonForm.formFields.filter((item, i) => i != indexToRemove);
+    jsonForm.formFields = res;
+    setUpdateTrigger(Date.now());
   };
   return (
     <div className="p-10">
@@ -73,7 +78,11 @@ function EditForm({ params }) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <div className="p-5 border rounded-lg shadow-sm ">Controller</div>
         <div className="md:col-span-2 border rounded-lg  p-5 flex items-center justify-center">
-          <FormUi jsonform={jsonForm} onFieldUpdate={onFieldUpdate} />
+          <FormUi
+            jsonform={jsonForm}
+            onFieldUpdate={onFieldUpdate}
+            deleteField={(i) => deleteField(i)}
+          />
         </div>
       </div>
     </div>

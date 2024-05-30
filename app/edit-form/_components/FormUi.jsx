@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import EditField from "./EditField";
 
-function FormUi({ jsonform, onFieldUpdate }) {
+function FormUi({ jsonform, onFieldUpdate, deleteField }) {
   return (
     <div className="my-3 border p-5 md:w-[600px] rounded-lg">
       <h2 className="font-bold text-center text-2xl text-primary">
@@ -84,6 +84,7 @@ function FormUi({ jsonform, onFieldUpdate }) {
             <EditField
               defaultValue={field}
               onUpdate={(value) => onFieldUpdate(value, i)}
+              deleteField={() => deleteField(i)}
             />
           </div>
         </div>

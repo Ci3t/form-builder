@@ -8,10 +8,22 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
-function EditField({ defaultValue, onUpdate }) {
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
+function EditField({ defaultValue, onUpdate, deleteField }) {
   const [label, setLabel] = useState(defaultValue?.label);
   const [placeholder, setPlaceholder] = useState(defaultValue?.placeholder);
-  console.log(defaultValue);
+
   return (
     <div className="flex gap-2">
       <Popover>
@@ -55,7 +67,27 @@ function EditField({ defaultValue, onUpdate }) {
           </Button>
         </PopoverContent>
       </Popover>
-      <Trash className="h-6 w-6 text-red-500 cursor-pointer" />
+
+      <AlertDialog>
+        <AlertDialogTrigger>
+          <Trash className="h-6 w-6 text-red-500 cursor-pointer" />
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your
+              field and remove your data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={() => deleteField()}>
+              Continue
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
