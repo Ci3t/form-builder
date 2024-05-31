@@ -11,7 +11,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import EditField from "./EditField";
-import { Button } from "@/components/ui/button";
 
 function FormUi({ jsonform, onFieldUpdate, deleteField, selectedTheme }) {
   return (
@@ -19,20 +18,16 @@ function FormUi({ jsonform, onFieldUpdate, deleteField, selectedTheme }) {
       className="my-3 border p-5 md:w-[600px] rounded-lg"
       data-theme={selectedTheme}
     >
-      <h2 className="font-bold text-center text-2xl text-primary">
-        {jsonform?.formTitle}
-      </h2>
-      <h2 className="text-sm text-gray-400 text-center">
-        {jsonform?.formSubheading}
-      </h2>
+      <h2 className="font-bold text-center text-2xl ">{jsonform?.formTitle}</h2>
+      <h2 className="text-sm  text-center">{jsonform?.formSubheading}</h2>
 
       {jsonform?.formFields?.map((field, i) => (
         <div key={i} className="flex items-center gap-2">
           {field.fieldType == "select" ? (
             <div className="my-3 w-full">
-              <label className="text-sm text-gray-500 ">{field?.label}</label>
+              <label className="text-sm  ">{field?.label}</label>
               <Select>
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full bg-inherit text-inherit">
                   <SelectValue placeholder={field.placeholder} />
                 </SelectTrigger>
                 <SelectContent>
@@ -46,11 +41,15 @@ function FormUi({ jsonform, onFieldUpdate, deleteField, selectedTheme }) {
             </div>
           ) : field.fieldType == "radio" ? (
             <div className="my-3 w-full">
-              <label className="text-sm text-gray-500 ">{field?.label}</label>
+              <label className="text-sm  ">{field?.label}</label>
               <RadioGroup>
                 {field.options?.map((option, i) => (
                   <div key={i} className="flex items-center space-x-2">
-                    <RadioGroupItem value={option} id={option} />
+                    <RadioGroupItem
+                      className="border-inherit text-inherit"
+                      value={option}
+                      id={option}
+                    />
                     <Label htmlFor={option}>{option}</Label>
                   </div>
                 ))}
@@ -58,12 +57,12 @@ function FormUi({ jsonform, onFieldUpdate, deleteField, selectedTheme }) {
             </div>
           ) : field.fieldType == "checkbox" ? (
             <div className="my-3 w-full">
-              <label className="text-sm text-gray-500 ">{field.label}</label>
+              <label className="text-sm  ">{field.label}</label>
 
               {field?.options ? (
                 field?.options?.map((option, i) => (
                   <div key={i} className="flex gap-2 items-center">
-                    <Checkbox />
+                    <Checkbox className="border-inherit bg-inherit data-[state=checked]:text-inherit data-[state=checked]:bg-inherit" />
                     <h2>{option}</h2>
                   </div>
                 ))
@@ -76,8 +75,9 @@ function FormUi({ jsonform, onFieldUpdate, deleteField, selectedTheme }) {
             </div>
           ) : (
             <div className="my-3 w-full">
-              <label className="text-sm text-gray-500 ">{field?.label}</label>
+              <label className="text-sm  ">{field?.label}</label>
               <Input
+                className="bg-inherit text-inherit"
                 type={field?.fieldType}
                 placeholder={field?.placeholder}
                 name={field?.fieldName}
@@ -93,7 +93,7 @@ function FormUi({ jsonform, onFieldUpdate, deleteField, selectedTheme }) {
           </div>
         </div>
       ))}
-      <Button className="btn btn-primary">Submit</Button>
+      <button className="btn btn-primary">Submit</button>
     </div>
   );
 }
