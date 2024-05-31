@@ -10,12 +10,14 @@ import { useEffect, useState } from "react";
 import FormUi from "../_components/FormUi";
 import { json } from "drizzle-orm/mysql-core";
 import { toast } from "sonner";
+import Controller from "../_components/Controller";
 
 function EditForm({ params }) {
   const { user } = useUser();
   const [jsonForm, setJsonForm] = useState([]);
   const [updateTrigger, setUpdateTrigger] = useState();
   const [record, setRecord] = useState([]);
+  const [selectedTheme, setSelectedTheme] = useState("dark");
   const router = useRouter();
 
   const getFormData = async () => {
@@ -76,9 +78,12 @@ function EditForm({ params }) {
         <ArrowLeft /> Back
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <div className="p-5 border rounded-lg shadow-sm ">Controller</div>
+        <div className="p-5 border rounded-lg shadow-sm ">
+          <Controller selectedTheme={(val) => setSelectedTheme(val)} />
+        </div>
         <div className="md:col-span-2 border rounded-lg  p-5 flex items-center justify-center">
           <FormUi
+            selectedTheme={selectedTheme}
             jsonform={jsonForm}
             onFieldUpdate={onFieldUpdate}
             deleteField={(i) => deleteField(i)}

@@ -11,10 +11,14 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import EditField from "./EditField";
+import { Button } from "@/components/ui/button";
 
-function FormUi({ jsonform, onFieldUpdate, deleteField }) {
+function FormUi({ jsonform, onFieldUpdate, deleteField, selectedTheme }) {
   return (
-    <div className="my-3 border p-5 md:w-[600px] rounded-lg">
+    <div
+      className="my-3 border p-5 md:w-[600px] rounded-lg"
+      data-theme={selectedTheme}
+    >
       <h2 className="font-bold text-center text-2xl text-primary">
         {jsonform?.formTitle}
       </h2>
@@ -89,6 +93,7 @@ function FormUi({ jsonform, onFieldUpdate, deleteField }) {
           </div>
         </div>
       ))}
+      <Button className="btn btn-primary">Submit</Button>
     </div>
   );
 }
