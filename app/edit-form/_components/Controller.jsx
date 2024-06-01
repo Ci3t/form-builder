@@ -1,3 +1,4 @@
+import Gradient from "@/app/_themeData/Gradient";
 import Themes from "@/app/_themeData/Themes";
 import {
   Select,
@@ -10,7 +11,8 @@ import {
 function Controller({ selectedTheme }) {
   return (
     <div>
-      <h2>Select Themes</h2>
+      {/* Theme selection */}
+      <h2 className="my-1">Select Themes</h2>
       <Select onValueChange={(val) => selectedTheme(val)}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Theme" />
@@ -43,6 +45,17 @@ function Controller({ selectedTheme }) {
           ))}
         </SelectContent>
       </Select>
+
+      {/* BG Selection */}
+      <h2 className="mt-8 my-1">Background</h2>
+      <div className="grid grid-cols-3 gap-4 ">
+        {Gradient.map((bg, i) => (
+          <div
+            className="w-full h-[70px] rounded-lg hover:border-black hover:border-2 cursor-pointer "
+            style={{ background: bg.gradient }}
+          ></div>
+        ))}
+      </div>
     </div>
   );
 }
