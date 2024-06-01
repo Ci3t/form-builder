@@ -33,6 +33,8 @@ function EditForm({ params }) {
       );
     setRecord(res[0]);
     setJsonForm(JSON.parse(res[0].jsonform));
+    setSelectedBg(res[0].background);
+    setSelectedTheme(res[0].theme);
   };
   const onFieldUpdate = (value, i) => {
     jsonForm.formFields[i].label = value.label;
@@ -63,12 +65,27 @@ function EditForm({ params }) {
           eq(JsonForms.createdBy, user?.primaryEmailAddress?.emailAddress)
         )
       );
-    toast("Field Updated!!!");
+    toast("Updated!!!");
   };
   const deleteField = (indexToRemove) => {
     const res = jsonForm.formFields.filter((item, i) => i != indexToRemove);
     jsonForm.formFields = res;
     setUpdateTrigger(Date.now());
+  };
+
+  const updateFields = async (val, colName) => {
+    const res = await db
+      .update(JsonForms)
+      .set({
+        [colName]: val,
+      })
+      .where(
+        and(
+          eq(JsonForms.id, record.id),
+          eq(JsonForms.createdBy, user?.primaryEmailAddress?.emailAddress)
+        )
+      );
+    toast([colName] + " Updated!!!");
   };
   return (
     <div className="p-10">
@@ -81,8 +98,14 @@ function EditForm({ params }) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <div className="p-5 border rounded-lg shadow-sm ">
           <Controller
-            selectedTheme={(val) => setSelectedTheme(val)}
-            selectedBg={(val) => setSelectedBg(val)}
+            selectedTheme={(val) => {
+              updateFields(val, "theme");
+              setSelectedTheme(val);
+            }}
+            selectedBg={(val) => {
+              updateFields(val, "background");
+              setSelectedBg(val);
+            }}
           />
         </div>
         <div
