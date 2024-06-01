@@ -1,5 +1,6 @@
 import Gradient from "@/app/_themeData/Gradient";
 import Themes from "@/app/_themeData/Themes";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -7,8 +8,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from "react";
 
-function Controller({ selectedTheme }) {
+function Controller({ selectedTheme, selectedBg }) {
+  const [showMore, setShowMore] = useState(6);
+  console.log(showMore);
   return (
     <div>
       {/* Theme selection */}
@@ -49,13 +53,28 @@ function Controller({ selectedTheme }) {
       {/* BG Selection */}
       <h2 className="mt-8 my-1">Background</h2>
       <div className="grid grid-cols-3 gap-4 ">
-        {Gradient.map((bg, i) => (
-          <div
-            className="w-full h-[70px] rounded-lg hover:border-black hover:border-2 cursor-pointer "
-            style={{ background: bg.gradient }}
-          ></div>
-        ))}
+        {Gradient.map(
+          (bg, i) =>
+            i < showMore && (
+              <div
+                key={i + bg.name}
+                className="w-full h-[70px] rounded-lg hover:border-black hover:border-2 cursor-pointer flex justify-center items-center"
+                style={{ background: bg.gradient }}
+                onClick={() => selectedBg(bg.gradient)}
+              >
+                {i == 0 && "None"}
+              </div>
+            )
+        )}
       </div>
+      <Button
+        variant="ghost"
+        size="sm"
+        className="w-full my-1"
+        onClick={() => setShowMore(showMore > 6 ? 6 : Gradient.length)}
+      >
+        {showMore > 6 ? "Less" : "More"}
+      </Button>
     </div>
   );
 }
