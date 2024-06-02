@@ -12,11 +12,23 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import EditField from "./EditField";
 
-function FormUi({ jsonform, onFieldUpdate, deleteField, selectedTheme }) {
+function FormUi({
+  jsonform,
+  onFieldUpdate,
+  deleteField,
+  selectedTheme,
+  selectedBorder,
+}) {
   return (
     <div
       className="my-3 border p-5 md:w-[600px] rounded-lg"
       data-theme={selectedTheme}
+      style={{
+        boxShadow:
+          selectedBorder?.key == selectedBorder?.key && selectedBorder?.value,
+        border:
+          selectedBorder?.name == selectedBorder?.name && selectedBorder?.value,
+      }}
     >
       <h2 className="font-bold text-center text-2xl ">{jsonform?.formTitle}</h2>
       <h2 className="text-sm  text-center">{jsonform?.formSubheading}</h2>
@@ -77,7 +89,7 @@ function FormUi({ jsonform, onFieldUpdate, deleteField, selectedTheme }) {
             <div className="my-3 w-full">
               <label className="text-sm  ">{field?.label}</label>
               <Input
-                className="bg-inherit text-inherit"
+                className="bg-inherit text-inherit placeholder:text-inherit"
                 type={field?.fieldType}
                 placeholder={field?.placeholder}
                 name={field?.fieldName}

@@ -1,3 +1,4 @@
+import BorderStyle from "@/app/_themeData/BorderStyle";
 import Gradient from "@/app/_themeData/Gradient";
 import Themes from "@/app/_themeData/Themes";
 import { Button } from "@/components/ui/button";
@@ -10,7 +11,12 @@ import {
 } from "@/components/ui/select";
 import { useState } from "react";
 
-function Controller({ selectedTheme, selectedBg }) {
+function Controller({
+  selectedTheme,
+  selectedBg,
+  selectedBorder,
+  selectedBorder2,
+}) {
   const [showMore, setShowMore] = useState(6);
   console.log(showMore);
   return (
@@ -75,6 +81,29 @@ function Controller({ selectedTheme, selectedBg }) {
       >
         {showMore > 6 ? "Less" : "More"}
       </Button>
+
+      {/*! Borders */}
+
+      <div>
+        <label>Border Style</label>
+        <div className="grid grid-cols-3 gap-3">
+          {BorderStyle.map((border, i) => (
+            <div className="flex justify-center items-center flex-col">
+              <div
+                className="cursor-pointer hover:border-2 rounded-lg  w-[70px] h-[70px]  flex justify-center items-center"
+                style={{
+                  boxShadow: border?.key == border?.key && border?.value,
+                  border: border?.name == border?.name && border?.value,
+                }}
+                onClick={() => selectedBorder(border)}
+              >
+                {i == 0 && "None"}
+              </div>
+              <h2 className="">{border.name}</h2>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

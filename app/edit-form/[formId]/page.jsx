@@ -19,6 +19,7 @@ function EditForm({ params }) {
   const [record, setRecord] = useState([]);
   const [selectedTheme, setSelectedTheme] = useState("dark");
   const [selectedBg, setSelectedBg] = useState();
+  const [selectedBorder, setSelectedBorder] = useState();
   const router = useRouter();
 
   const getFormData = async () => {
@@ -35,6 +36,7 @@ function EditForm({ params }) {
     setJsonForm(JSON.parse(res[0].jsonform));
     setSelectedBg(res[0].background);
     setSelectedTheme(res[0].theme);
+    setSelectedBorder(JSON.parse(res[0].style));
   };
   const onFieldUpdate = (value, i) => {
     jsonForm.formFields[i].label = value.label;
@@ -106,6 +108,11 @@ function EditForm({ params }) {
               updateFields(val, "background");
               setSelectedBg(val);
             }}
+            selectedBorder={(val) => {
+              updateFields(val, "style");
+              setSelectedBorder(val);
+            }}
+            selectedBorder2={selectedBorder}
           />
         </div>
         <div
@@ -114,6 +121,7 @@ function EditForm({ params }) {
         >
           <FormUi
             selectedTheme={selectedTheme}
+            selectedBorder={selectedBorder}
             jsonform={jsonForm}
             onFieldUpdate={onFieldUpdate}
             deleteField={(i) => deleteField(i)}
