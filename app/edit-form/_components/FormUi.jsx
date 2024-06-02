@@ -12,6 +12,10 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import EditField from "./EditField";
 import { useState } from "react";
+import { db } from "@/configs";
+import { userResponses } from "@/configs/schema";
+import moment from "moment";
+import { toast } from "sonner";
 
 function FormUi({
   jsonform,
@@ -37,9 +41,38 @@ function FormUi({
       [name]: value,
     });
   };
-  const onFormSubmit = (e) => {
+  const handleCheckBoxChange = (fieldName, option, value) => {
+    const options = formData?.[fieldName] ? formData?.[fieldName] : [];
+
+    if (value) {
+      options.push({
+        label: option,
+        value,
+      });
+      setFormData({
+        ...formData,
+        [fieldName]: options,
+      });
+    } else {
+      const res = options.filter((o) => o.label == option);
+      setFormData({
+        ...formData,
+        [fieldName]: res,
+      });
+    }
+  };
+  const onFormSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
+
+    const res = await db.insert(userResponses).values({
+      jsonResponse: formData,
+      createdAt: moment().format("DD/MM/YYYY"),
+    });
+
+    if (res) {
+      toast("Form Submitted Successfully");
+    }
   };
   return (
     <form
@@ -105,13 +138,18 @@ function FormUi({
               {field?.options ? (
                 field?.options?.map((option, i) => (
                   <div key={i} className="flex gap-2 items-center">
-                    <Checkbox className="border-inherit bg-inherit data-[state=checked]:text-inherit data-[state=checked]:bg-inherit" />
+                    <Checkbox
+                      onCheckedChange={(v) =>
+                        handleCheckBoxChange(field?.label, option, v)
+                      }
+                      className="border-inherit bg-inherit data-[state=checked]:text-inherit data-[state=checked]:bg-inherit"
+                    />
                     <h2>{option}</h2>
                   </div>
                 ))
               ) : (
                 <div className="flex gap-2 items-center">
-                  <Checkbox />
+                  <Checkbox required={field?.required} />
                   <h2>{field.label}</h2>
                 </div>
               )}
