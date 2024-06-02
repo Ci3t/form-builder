@@ -88,7 +88,10 @@ function Controller({
         <label>Border Style</label>
         <div className="grid grid-cols-3 gap-3">
           {BorderStyle.map((border, i) => (
-            <div className="flex justify-center items-center flex-col">
+            <div
+              key={i + border.name}
+              className="flex justify-center items-center flex-col"
+            >
               <div
                 className="cursor-pointer hover:border-2 rounded-lg  w-[70px] h-[70px]  flex justify-center items-center"
                 style={{

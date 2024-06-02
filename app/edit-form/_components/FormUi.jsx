@@ -18,6 +18,7 @@ function FormUi({
   deleteField,
   selectedTheme,
   selectedBorder,
+  editable = true,
 }) {
   return (
     <div
@@ -96,13 +97,15 @@ function FormUi({
               />
             </div>
           )}
-          <div>
-            <EditField
-              defaultValue={field}
-              onUpdate={(value) => onFieldUpdate(value, i)}
-              deleteField={() => deleteField(i)}
-            />
-          </div>
+          {editable && (
+            <div>
+              <EditField
+                defaultValue={field}
+                onUpdate={(value) => onFieldUpdate(value, i)}
+                deleteField={() => deleteField(i)}
+              />
+            </div>
+          )}
         </div>
       ))}
       <button className="btn btn-primary">Submit</button>
