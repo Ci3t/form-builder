@@ -11,6 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import EditField from "./EditField";
+import { useState } from "react";
 
 function FormUi({
   jsonform,
@@ -20,8 +21,29 @@ function FormUi({
   selectedBorder,
   editable = true,
 }) {
+  const [formData, setFormData] = useState();
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSelectChange = (name, value) => {
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
   return (
-    <div
+    <form
+      onSubmit={onFormSubmit}
       className="my-3 border p-5 md:w-[600px] rounded-lg"
       data-theme={selectedTheme}
       style={{
@@ -39,7 +61,12 @@ function FormUi({
           {field.fieldType == "select" ? (
             <div className="my-3 w-full">
               <label className="text-sm  ">{field?.label}</label>
-              <Select>
+              <Select
+                onValueChange={(value) =>
+                  handleSelectChange(field?.fieldName, value)
+                }
+                required={field?.required}
+              >
                 <SelectTrigger className="w-full bg-inherit text-inherit">
                   <SelectValue placeholder={field.placeholder} />
                 </SelectTrigger>
@@ -55,10 +82,13 @@ function FormUi({
           ) : field.fieldType == "radio" ? (
             <div className="my-3 w-full">
               <label className="text-sm  ">{field?.label}</label>
-              <RadioGroup>
+              <RadioGroup required={field?.required}>
                 {field.options?.map((option, i) => (
                   <div key={i} className="flex items-center space-x-2">
                     <RadioGroupItem
+                      onClick={() =>
+                        handleSelectChange(field?.fieldName, option)
+                      }
                       className="border-inherit text-inherit"
                       value={option}
                       id={option}
@@ -90,6 +120,8 @@ function FormUi({
             <div className="my-3 w-full">
               <label className="text-sm  ">{field?.label}</label>
               <Input
+                required={field?.required}
+                onChange={(e) => handleInputChange(e)}
                 className="bg-inherit text-inherit placeholder:text-inherit"
                 type={field?.fieldType}
                 placeholder={field?.placeholder}
@@ -108,8 +140,10 @@ function FormUi({
           )}
         </div>
       ))}
-      <button className="btn btn-primary">Submit</button>
-    </div>
+      <button type="submit" className="btn btn-primary">
+        Submit
+      </button>
+    </form>
   );
 }
 
