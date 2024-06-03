@@ -34,7 +34,7 @@ function SideNav() {
           <h2
             key={i}
             className={`flex items-center gap-3 mb-3 p-4 hover:bg-primary hover:text-white rounded-lg cursor-pointer text-gray-500 ${
-              path == m.path && "bg-primary text-[#fff]"
+              path == m.path && "bg-primary text-white"
             }`}
           >
             <m.icon />

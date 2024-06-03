@@ -11,7 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import EditField from "./EditField";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { db } from "@/configs";
 import { userResponses } from "@/configs/schema";
 import moment from "moment";
@@ -24,8 +24,10 @@ function FormUi({
   selectedTheme,
   selectedBorder,
   editable = true,
+  formId = 0,
 }) {
   const [formData, setFormData] = useState();
+  let formRef = useRef();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -68,14 +70,19 @@ function FormUi({
     const res = await db.insert(userResponses).values({
       jsonResponse: formData,
       createdAt: moment().format("DD/MM/YYYY"),
+      formId,
     });
 
     if (res) {
       toast("Form Submitted Successfully");
+      formRef.reset();
+    } else {
+      toast("Error while saving your form");
     }
   };
   return (
     <form
+      ref={(e) => (formRef = e)}
       onSubmit={onFormSubmit}
       className="my-3 border p-5 md:w-[600px] rounded-lg"
       data-theme={selectedTheme}

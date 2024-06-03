@@ -40,6 +40,7 @@ function LiveForm({ params }) {
           selectedBorder={JSON.parse(record?.style)}
           selectedTheme={record?.theme}
           editable={false}
+          formId={record?.id}
         />
       )}
       <Link
