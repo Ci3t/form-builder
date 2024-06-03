@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import Controller from "../_components/Controller";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { RWebShare } from "react-web-share";
 
 function EditForm({ params }) {
   const { user } = useUser();
@@ -107,10 +108,20 @@ function EditForm({ params }) {
               <ScanEye /> Preview
             </Button>
           </Link>
-          <Button className="flex gap-2 hover:bg-green-600 bg-green-800">
-            <Share2 />
-            Share
-          </Button>
+          <RWebShare
+            data={{
+              text: jsonForm?.formSubheading,
+              url:
+                process.env.NEXT_PUBLIC_BASE_URL + "/live-form/" + record?.id,
+              title: jsonForm?.formTitle,
+            }}
+            onClick={() => console.log("shared successfully!")}
+          >
+            <Button className="flex gap-2 hover:bg-green-600 bg-green-800">
+              <Share2 />
+              Share
+            </Button>
+          </RWebShare>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">

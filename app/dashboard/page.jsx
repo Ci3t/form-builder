@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import CreateForm from "./_components/CreateForm";
+import Forms from "./_components/Forms";
 
 const Dashboard = () => {
   return (
@@ -9,6 +10,9 @@ const Dashboard = () => {
         Dashboard
         <CreateForm />
       </h2>
+      {/* Forms */}
+
+      <Forms />
     </div>
   );
 };
