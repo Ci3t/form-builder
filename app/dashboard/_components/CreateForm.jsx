@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { db } from "@/configs";
 import { AiChatSession } from "@/configs/AiModal";
 import { JsonForms } from "@/configs/schema";
+
 import { useUser } from "@clerk/nextjs";
 import { desc, eq } from "drizzle-orm";
 import { Loader2 } from "lucide-react";
@@ -19,7 +20,7 @@ import moment from "moment/moment";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const CreateForm = () => {
+const CreateForm = ({ isPro }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -69,7 +70,7 @@ const CreateForm = () => {
     const percent = (res.length / 3) * 100;
     setPercentForm(percent);
   };
-  console.log("percentForm", percentForm);
+
   return (
     <div>
       <>

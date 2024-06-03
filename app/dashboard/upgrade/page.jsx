@@ -1,9 +1,26 @@
 "use client";
 import Pricing from "@/app/_themeData/Pricing";
 import { useUser } from "@clerk/nextjs";
+import axios from "axios";
+import { useState } from "react";
 
 function Upgrade() {
   const { user } = useUser();
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscription = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get("/api/stripe");
+      console.log(res);
+      window.location.href = res.data.url;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="p-10">
       <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -109,17 +126,13 @@ function Upgrade() {
                 </li>
               </ul>
 
-              <a
-                href={
-                  price.link +
-                  "?prefilled_email=" +
-                  user?.primaryEmailAddress.emailAddress
-                }
-                target="_blank"
+              <button
+                disabled={loading}
+                onClick={handleSubscription}
                 className="mt-8 block rounded-full border border-indigo-600 bg-white px-12 py-3 text-center text-sm font-medium text-indigo-600 hover:ring-1 hover:ring-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
               >
                 Get Started
-              </a>
+              </button>
             </div>
           ))}
         </div>
