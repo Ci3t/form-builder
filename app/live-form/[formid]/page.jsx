@@ -41,6 +41,7 @@ function LiveForm({ params }) {
           selectedTheme={record?.theme}
           editable={false}
           formId={record?.id}
+          enableSignIn={record?.enableSignIn}
         />
       )}
       <Link

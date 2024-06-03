@@ -16,6 +16,8 @@ import { db } from "@/configs";
 import { userResponses } from "@/configs/schema";
 import moment from "moment";
 import { toast } from "sonner";
+import { SignInButton, useUser } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 function FormUi({
   jsonform,
@@ -25,8 +27,10 @@ function FormUi({
   selectedBorder,
   editable = true,
   formId = 0,
+  enableSignIn = false,
 }) {
   const [formData, setFormData] = useState();
+  const { user, isSignedIn } = useUser();
   let formRef = useRef();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -185,9 +189,15 @@ function FormUi({
           )}
         </div>
       ))}
-      <button type="submit" className="btn btn-primary">
-        Submit
-      </button>
+      {!enableSignIn ? (
+        <button className="btn btn-primary">Submit</button>
+      ) : isSignedIn ? (
+        <button className="btn btn-primary">Submit</button>
+      ) : (
+        <Button>
+          <SignInButton mode="modal">Sign In before Submit</SignInButton>
+        </Button>
+      )}
     </form>
   );
 }

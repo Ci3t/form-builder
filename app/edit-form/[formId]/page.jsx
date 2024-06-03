@@ -91,7 +91,11 @@ function EditForm({ params }) {
           eq(JsonForms.createdBy, user?.primaryEmailAddress?.emailAddress)
         )
       );
-    toast([colName] + " Updated!!!");
+    toast(
+      [colName] == "enableSignIn"
+        ? "Authentication Enabled"
+        : [colName] + " Updated!!!"
+    );
   };
   return (
     <div className="p-10">
@@ -140,6 +144,9 @@ function EditForm({ params }) {
               setSelectedBorder(val);
             }}
             selectedBorder2={selectedBorder}
+            setSignInEnable={(val) => {
+              updateFields(val, "enableSignIn");
+            }}
           />
         </div>
         <div

@@ -1,6 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { db } from "@/configs";
+import { JsonForms } from "@/configs/schema";
+import { useUser } from "@clerk/nextjs";
+import { desc, eq } from "drizzle-orm";
 import {
   DiamondPlus,
   Library,
@@ -9,9 +13,11 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 function SideNav() {
+  const [formList, setFormList] = useState([]);
+  const [percentForm, setPercentForm] = useState(0);
   const menu = [
     { id: 1, name: "My Forms", icon: Library, path: "/dashboard" },
     {
@@ -25,8 +31,24 @@ function SideNav() {
   ];
 
   const path = usePathname();
+  const { user } = useUser();
+  useEffect(() => {
+    user && GetFormList();
+  }, [user]);
 
-  useEffect(() => {}, [path]);
+  const GetFormList = async () => {
+    const res = await db
+      .select()
+      .from(JsonForms)
+      .where(eq(JsonForms.createdBy, user?.primaryEmailAddress?.emailAddress))
+      .orderBy(desc(JsonForms.id));
+
+    setFormList(res);
+    console.log(res);
+
+    const percent = (res.length / 3) * 100;
+    setPercentForm(percent);
+  };
 
   return (
     <div className="h-screen shadow-md border">
@@ -47,9 +69,10 @@ function SideNav() {
       <div className="fixed bottom-7 p-6 w-64">
         <Button className="w-full">Create Form</Button>
         <div className="my-5">
-          <Progress value={33} />
+          <Progress value={percentForm} />
           <h2 className="text-sm mt-2 text-gray-600">
-            <strong>2 </strong>Out of <strong>3</strong> File Created
+            <strong>{formList?.length} </strong>Out of <strong>3</strong> File
+            Created
           </h2>
           <h2 className="text-sm mt-2 text-gray-600">
             Upgrade to Pro for unlimited AI Form

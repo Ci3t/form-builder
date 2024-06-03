@@ -38,13 +38,13 @@ function FormResponse({ form, formRecord }) {
       .from(userResponses)
       .groupBy(userResponses.formId)
       .execute();
-    console.log(res);
+
     setResCount(res);
   };
 
   useEffect(() => {
     user && getSum();
-  }, [user]);
+  }, []);
 
   const exportToExcel = async (data) => {
     const worksheet = XLSX.utils.json_to_sheet(data);
@@ -58,12 +58,14 @@ function FormResponse({ form, formRecord }) {
       <h2 className="text-sm text-gray-500">{form?.formSubheading}</h2>
       <hr className="my-4" />
       <div className="flex justify-between">
-        <h2 className="text-sm gap-2">
-          {resCount?.map(
-            (res) => formRecord.id == res.formId && <b> {res.responseCount}</b>
-          )}{" "}
+        <h2 className="text-sm flex gap-1">
+          {resCount?.map((res, i) => (
+            <div key={i}>
+              {formRecord.id == res.formId && <b>{res.responseCount}</b>}
+            </div>
+          ))}
           Repsonses
-        </h2>{" "}
+        </h2>
         <Button size="sm" onClick={() => exportData()} disabled={loading}>
           {loading ? <LoaderPinwheel className="animate-spin" /> : "Export"}
         </Button>

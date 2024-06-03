@@ -2,6 +2,7 @@ import BorderStyle from "@/app/_themeData/BorderStyle";
 import Gradient from "@/app/_themeData/Gradient";
 import Themes from "@/app/_themeData/Themes";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -16,6 +17,7 @@ function Controller({
   selectedBg,
   selectedBorder,
   selectedBorder2,
+  setSignInEnable,
 }) {
   const [showMore, setShowMore] = useState(6);
   console.log(showMore);
@@ -106,6 +108,10 @@ function Controller({
             </div>
           ))}
         </div>
+      </div>
+      <div className="flex gap-2 my-4 items-center mt-10">
+        <Checkbox onCheckedChange={(e) => setSignInEnable(e)} />{" "}
+        <h2>Enable Social Authentication before submitting </h2>
       </div>
     </div>
   );
