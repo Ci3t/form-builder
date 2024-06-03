@@ -190,7 +190,9 @@ function FormUi({
         </div>
       ))}
       {!enableSignIn ? (
-        <button className="btn btn-primary">Submit</button>
+        <button type="button" className="btn btn-primary">
+          Submit
+        </button>
       ) : isSignedIn ? (
         <button className="btn btn-primary">Submit</button>
       ) : (

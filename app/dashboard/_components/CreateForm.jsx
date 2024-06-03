@@ -13,15 +13,17 @@ import { db } from "@/configs";
 import { AiChatSession } from "@/configs/AiModal";
 import { JsonForms } from "@/configs/schema";
 import { useUser } from "@clerk/nextjs";
+import { desc, eq } from "drizzle-orm";
 import { Loader2 } from "lucide-react";
 import moment from "moment/moment";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const CreateForm = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [percentForm, setPercentForm] = useState(0);
   const { user } = useUser();
   const route = useRouter();
 
@@ -52,31 +54,61 @@ const CreateForm = () => {
     setLoading(false);
     console.log(result.response.text());
   };
+
+  useEffect(() => {
+    user && GetFormList();
+  }, [user]);
+
+  const GetFormList = async () => {
+    const res = await db
+      .select()
+      .from(JsonForms)
+      .where(eq(JsonForms.createdBy, user?.primaryEmailAddress?.emailAddress))
+      .orderBy(desc(JsonForms.id));
+    console.log(res);
+    const percent = (res.length / 3) * 100;
+    setPercentForm(percent);
+  };
+  console.log("percentForm", percentForm);
   return (
     <div>
-      <Button onClick={() => setOpenDialog(true)}>Create Form</Button>
-      <Dialog open={openDialog}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Create new form</DialogTitle>
-            <DialogDescription>
-              <Textarea
-                className="my-2"
-                placeholder="Write description of your form"
-                onChange={(e) => setUserInput(e.target.value)}
-              />
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex gap-2 justify-end">
-            <Button variant="destructive" onClick={() => setOpenDialog(false)}>
-              Cancel
-            </Button>
-            <Button disabled={loading} onClick={onCreateForm}>
-              {loading ? <Loader2 className="animate-spin" /> : "Create"}
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <>
+        <Button
+          disabled={percentForm == 100}
+          onClick={() => setOpenDialog(true)}
+        >
+          {percentForm == 100 ? (
+            <>Limit Reached Please Upgrade to Pro</>
+          ) : (
+            "Create Form"
+          )}
+        </Button>
+        <Dialog open={openDialog}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Create new form</DialogTitle>
+              <DialogDescription>
+                <Textarea
+                  className="my-2"
+                  placeholder="Write description of your form"
+                  onChange={(e) => setUserInput(e.target.value)}
+                />
+              </DialogDescription>
+            </DialogHeader>
+            <div className="flex gap-2 justify-end">
+              <Button
+                variant="destructive"
+                onClick={() => setOpenDialog(false)}
+              >
+                Cancel
+              </Button>
+              <Button disabled={loading} onClick={onCreateForm}>
+                {loading ? <Loader2 className="animate-spin" /> : "Create"}
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </>
     </div>
   );
 };

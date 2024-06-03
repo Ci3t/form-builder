@@ -1,5 +1,5 @@
 import { SignedIn } from "@clerk/nextjs";
-import React from "react";
+
 import SideNav from "./_components/SideNav";
 
 const DashboardLayout = ({ children }) => {
