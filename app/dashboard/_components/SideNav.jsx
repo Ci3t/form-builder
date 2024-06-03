@@ -7,6 +7,7 @@ import {
   LineChart,
   MessageCircleMore,
 } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect } from "react";
 
@@ -31,7 +32,8 @@ function SideNav() {
     <div className="h-screen shadow-md border">
       <div className="p-5">
         {menu.map((m, i) => (
-          <h2
+          <Link
+            href={m.path}
             key={i}
             className={`flex items-center gap-3 mb-3 p-4 hover:bg-primary hover:text-white rounded-lg cursor-pointer text-gray-500 ${
               path == m.path && "bg-primary text-white"
@@ -39,7 +41,7 @@ function SideNav() {
           >
             <m.icon />
             {m.name}
-          </h2>
+          </Link>
         ))}
       </div>
       <div className="fixed bottom-7 p-6 w-64">
