@@ -75,10 +75,10 @@ const CreateForm = ({ isPro }) => {
     <div>
       <>
         <Button
-          disabled={percentForm == 100}
+          disabled={percentForm == 100 && !isPro}
           onClick={() => setOpenDialog(true)}
         >
-          {percentForm == 100 ? (
+          {percentForm == 100 && !isPro ? (
             <>Limit Reached Please Upgrade to Pro</>
           ) : (
             "Create Form"

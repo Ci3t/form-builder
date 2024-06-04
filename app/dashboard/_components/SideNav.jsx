@@ -15,19 +15,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-function SideNav() {
+function SideNav({ isPro }) {
   const [formList, setFormList] = useState([]);
   const [percentForm, setPercentForm] = useState(0);
   const menu = [
     { id: 1, name: "My Forms", icon: Library, path: "/dashboard" },
     {
-      id: 1,
+      id: 2,
       name: "Responses",
       icon: MessageCircleMore,
       path: "/dashboard/responses",
     },
-    { id: 1, name: "Analytics", icon: LineChart, path: "/dashboard/analytics" },
-    { id: 1, name: "Upgrade", icon: DiamondPlus, path: "/dashboard/upgrade" },
+    { id: 3, name: "Analytics", icon: LineChart, path: "/dashboard/analytics" },
+    { id: 4, name: "Upgrade", icon: DiamondPlus, path: "/dashboard/upgrade" },
   ];
 
   const path = usePathname();
@@ -44,7 +44,6 @@ function SideNav() {
       .orderBy(desc(JsonForms.id));
 
     setFormList(res);
-    console.log(res);
 
     const percent = (res.length / 3) * 100;
     setPercentForm(percent);
@@ -68,16 +67,22 @@ function SideNav() {
       </div>
       <div className="fixed bottom-7 p-6 w-64">
         <Button className="w-full">Create Form</Button>
-        <div className="my-5">
-          <Progress value={percentForm} />
-          <h2 className="text-sm mt-2 text-gray-600">
-            <strong>{formList?.length} </strong>Out of <strong>3</strong> File
-            Created
+        {isPro ? (
+          <h2 className="text-sm mt-2 text-gray-600 text-center">
+            Pro Account
           </h2>
-          <h2 className="text-sm mt-2 text-gray-600">
-            Upgrade to Pro for unlimited AI Form
-          </h2>
-        </div>
+        ) : (
+          <div className="my-5">
+            <Progress value={percentForm} />
+            <h2 className="text-sm mt-2 text-gray-600">
+              <strong>{formList?.length} </strong>Out of <strong>3</strong> File
+              Created
+            </h2>
+            <h2 className="text-sm mt-2 text-gray-600">
+              Upgrade to Pro for unlimited AI Form
+            </h2>
+          </div>
+        )}
       </div>
     </div>
   );
