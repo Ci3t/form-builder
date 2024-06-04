@@ -6,6 +6,7 @@ import { count, eq } from "drizzle-orm";
 import { LoaderPinwheel } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
+
 function FormResponse({ form, formRecord }) {
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
@@ -66,9 +67,11 @@ function FormResponse({ form, formRecord }) {
           ))}
           Repsonses
         </h2>
-        <Button size="sm" onClick={() => exportData()} disabled={loading}>
-          {loading ? <LoaderPinwheel className="animate-spin" /> : "Export"}
-        </Button>
+        <div className="flex gap-2 justify-center items-center">
+          <Button size="sm" onClick={() => exportData()} disabled={loading}>
+            {loading ? <LoaderPinwheel className="animate-spin" /> : "Export"}
+          </Button>
+        </div>
       </div>
     </div>
   );

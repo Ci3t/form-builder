@@ -26,7 +26,7 @@ function SideNav({ isPro }) {
       icon: MessageCircleMore,
       path: "/dashboard/responses",
     },
-    { id: 3, name: "Analytics", icon: LineChart, path: "/dashboard/analytics" },
+    // { id: 3, name: "Analytics", icon: LineChart, path: "/dashboard/analytics" },
     { id: 4, name: "Upgrade", icon: DiamondPlus, path: "/dashboard/upgrade" },
   ];
 
