@@ -67,7 +67,9 @@ function Controller({
               <div
                 key={i + bg.name}
                 className="w-full h-[70px] rounded-lg hover:border-black hover:border-2 cursor-pointer flex justify-center items-center"
-                style={{ background: bg.gradient }}
+                style={{
+                  background: bg.gradient,
+                }}
                 onClick={() => selectedBg(bg.gradient)}
               >
                 {i == 0 && "None"}

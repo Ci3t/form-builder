@@ -20,7 +20,7 @@ import moment from "moment/moment";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const CreateForm = ({ isPro }) => {
+const CreateForm = ({ isPro, className }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -75,14 +75,11 @@ const CreateForm = ({ isPro }) => {
     <div>
       <>
         <Button
+          className={className}
           disabled={percentForm == 100 && !isPro}
           onClick={() => setOpenDialog(true)}
         >
-          {percentForm == 100 && !isPro ? (
-            <>Limit Reached Please Upgrade to Pro</>
-          ) : (
-            "Create Form"
-          )}
+          {percentForm == 100 && !isPro ? "Upgrade" : "Create Form"}
         </Button>
         <Dialog open={openDialog}>
           <DialogContent>

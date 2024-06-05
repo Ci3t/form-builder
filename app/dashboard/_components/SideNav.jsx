@@ -14,6 +14,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import CreateForm from "./CreateForm";
 
 function SideNav({ isPro }) {
   const [formList, setFormList] = useState([]);
@@ -66,7 +67,9 @@ function SideNav({ isPro }) {
         ))}
       </div>
       <div className="fixed bottom-7 p-6 w-64">
-        <Button className="w-full">Create Form</Button>
+        <div className="w-full">
+          <CreateForm className={"w-full"} />
+        </div>
         {isPro ? (
           <h2 className="text-sm mt-2 text-gray-600 text-center">
             Pro Account
