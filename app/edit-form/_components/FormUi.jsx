@@ -18,6 +18,7 @@ import moment from "moment";
 import { toast } from "sonner";
 import { SignInButton, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
 
 function FormUi({
   jsonform,
@@ -40,7 +41,8 @@ function FormUi({
       [name]: value,
     });
   };
-
+  const path = usePathname();
+  console.log(path);
   const handleSelectChange = (name, value) => {
     setFormData({
       ...formData,
@@ -190,7 +192,10 @@ function FormUi({
         </div>
       ))}
       {!enableSignIn ? (
-        <button type="submit" className="btn btn-primary">
+        <button
+          type={path.includes("/edit-form") ? "button" : "submit"}
+          className="btn btn-primary"
+        >
           Submit
         </button>
       ) : isSignedIn ? (

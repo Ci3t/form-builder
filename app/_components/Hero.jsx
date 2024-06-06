@@ -20,12 +20,12 @@ function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <a
+            <div
               className="block w-full rounded bg-primary px-12 py-3 text-sm font-medium text-white shadow hover:bg-[#C85D1B] focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
               href="#"
             >
               <Link href={"/dashboard"}>Create AI Form</Link>
-            </a>
+            </div>
             <a
               className="block w-full rounded px-12 py-3 text-sm font-medium text-primary shadow hover:text-[#C85D1B] focus:outline-none focus:ring active:text-red-500 sm:w-auto"
               href="#"

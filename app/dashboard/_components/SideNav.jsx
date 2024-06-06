@@ -35,7 +35,7 @@ function SideNav({ isPro }) {
   const { user } = useUser();
   useEffect(() => {
     user && GetFormList();
-  }, [user]);
+  }, [user, formList]);
 
   const GetFormList = async () => {
     const res = await db
@@ -68,7 +68,7 @@ function SideNav({ isPro }) {
       </div>
       <div className="fixed bottom-7 p-6 w-64">
         <div className="w-full">
-          <CreateForm className={"w-full"} />
+          <CreateForm isPro={isPro} className={"w-full"} />
         </div>
         {isPro ? (
           <h2 className="text-sm mt-2 text-gray-600 text-center">

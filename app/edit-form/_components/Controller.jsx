@@ -20,7 +20,7 @@ function Controller({
   setSignInEnable,
 }) {
   const [showMore, setShowMore] = useState(6);
-  console.log(showMore);
+
   return (
     <div>
       {/* Theme selection */}

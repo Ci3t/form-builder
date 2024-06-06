@@ -6,6 +6,7 @@ const {
   integer,
   boolean,
   timestamp,
+  numeric,
 } = require("drizzle-orm/pg-core");
 
 export const JsonForms = pgTable("jsonForms", {
@@ -24,7 +25,9 @@ export const userResponses = pgTable("userResponses", {
   jsonResponse: text("jsonResponse").notNull(),
   createdBy: varchar("createdBy").default("anonymous"),
   createdAt: varchar("createdAt").notNull(),
-  formId: integer("formId").references(() => JsonForms.id),
+  formId: integer("formId").references(() => JsonForms.id, {
+    onDelete: "CASCADE",
+  }),
 });
 
 export const userSubscription = pgTable("userSubscription", {
@@ -36,4 +39,11 @@ export const userSubscription = pgTable("userSubscription", {
   }).unique(),
   stripePriceId: varchar("stripePriceId", { length: 256 }),
   stripeCurrentPeriodEnd: timestamp("stripeCurrentPeriodEnd"),
+});
+
+export const FreeTierTracking = pgTable("freeTierTracking", {
+  id: serial("id").primaryKey(),
+  userId: varchar("userId", { length: 256 }).notNull().unique(),
+  formsCreated: integer("formsCreated").default(0), // Track forms created under the free tier
+  isSub: boolean("isSub").default(false),
 });

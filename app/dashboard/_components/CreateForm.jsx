@@ -11,7 +11,11 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { db } from "@/configs";
 import { AiChatSession } from "@/configs/AiModal";
-import { JsonForms } from "@/configs/schema";
+import {
+  checkFormCreationLimit,
+  incrementFormCount,
+} from "@/configs/freeTierTries";
+import { JsonForms, userSubscription } from "@/configs/schema";
 
 import { useUser } from "@clerk/nextjs";
 import { desc, eq } from "drizzle-orm";
@@ -24,7 +28,9 @@ const CreateForm = ({ isPro, className }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [formList, setFormList] = useState([]);
   const [percentForm, setPercentForm] = useState(0);
+  const [canCreate, setCanCreate] = useState(true);
   const { user } = useUser();
   const route = useRouter();
 
@@ -47,6 +53,7 @@ const CreateForm = ({ isPro, className }) => {
         .returning({ id: JsonForms.id });
       console.log(`New form ID ${response[0].id}`);
       if (response[0].id) {
+        await incrementFormCount(user.id);
         route.push("/edit-form/" + response[0].id);
       }
       setLoading(false);
@@ -58,7 +65,7 @@ const CreateForm = ({ isPro, className }) => {
 
   useEffect(() => {
     user && GetFormList();
-  }, [user]);
+  }, [user, formList]);
 
   const GetFormList = async () => {
     const res = await db
@@ -66,20 +73,28 @@ const CreateForm = ({ isPro, className }) => {
       .from(JsonForms)
       .where(eq(JsonForms.createdBy, user?.primaryEmailAddress?.emailAddress))
       .orderBy(desc(JsonForms.id));
-    console.log(res);
+    setFormList(res);
     const percent = (res.length / 3) * 100;
     setPercentForm(percent);
   };
+  useEffect(() => {
+    const checkLimit = async () => {
+      const canCreateForm = await checkFormCreationLimit(user?.id);
+      setCanCreate(canCreateForm);
+    };
+
+    checkLimit();
+  }, [user?.id]);
 
   return (
     <div>
       <>
         <Button
           className={className}
-          disabled={percentForm == 100 && !isPro}
+          disabled={!canCreate && !isPro}
           onClick={() => setOpenDialog(true)}
         >
-          {percentForm == 100 && !isPro ? "Upgrade" : "Create Form"}
+          {!canCreate && !isPro ? "Upgrade" : "Create Form"}
         </Button>
         <Dialog open={openDialog}>
           <DialogContent>
