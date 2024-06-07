@@ -8,6 +8,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { db } from "@/configs";
 import { AiChatSession } from "@/configs/AiModal";
@@ -15,6 +17,7 @@ import {
   checkFormCreationLimit,
   incrementFormCount,
 } from "@/configs/freeTierTries";
+import { PROMPT, PROMPT2 } from "@/configs/prompts";
 import { JsonForms, userSubscription } from "@/configs/schema";
 
 import { useUser } from "@clerk/nextjs";
@@ -29,38 +32,55 @@ const CreateForm = ({ isPro, className }) => {
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [formList, setFormList] = useState([]);
+  const [inputTypes, setInputTypes] = useState({
+    text: null,
+    checkbox: null,
+    radio: null,
+    select: null,
+  });
   const [percentForm, setPercentForm] = useState(0);
   const [canCreate, setCanCreate] = useState(true);
   const { user } = useUser();
   const route = useRouter();
 
-  const PROMPT =
-    ", On the basis of the description please give form in json format with form title,form subheading with form having form field,form name,placeholder name,and form label,fieldType,field required in Json format also keep the json format in this order the formFields as array,formSubheading as string,formTitle as string inside the formfields objects key names are fieldName,fieldType,label,placeholder,required,options and keep options as an array with the value dont add a label inside";
   const onCreateForm = async () => {
-    setLoading(true);
-    const result = await AiChatSession.sendMessage(
-      "Description:" + userInput + PROMPT
-    );
+    const inputTypesString = Object.entries(inputTypes)
+      .map(([key, value]) => `${key}:${value}`)
+      .join(", ");
 
-    if (result.response.text()) {
-      const response = await db
-        .insert(JsonForms)
-        .values({
-          jsonform: result.response.text(),
-          createdBy: user?.primaryEmailAddress?.emailAddress,
-          createdAt: moment().format("DD/MM/YYYY"),
-        })
-        .returning({ id: JsonForms.id });
-      console.log(`New form ID ${response[0].id}`);
-      if (response[0].id) {
-        await incrementFormCount(user.id);
-        route.push("/edit-form/" + response[0].id);
+    const fullPrompt = `
+      Description: ${userInput}
+      ${PROMPT}
+      InputTypes: ${inputTypesString}
+      ${PROMPT2}
+    `;
+    setLoading(true);
+    console.log("Constructed Prompt:", fullPrompt);
+    try {
+      const result = await AiChatSession.sendMessage(fullPrompt);
+
+      if (result.response.text()) {
+        const response = await db
+          .insert(JsonForms)
+          .values({
+            jsonform: result.response.text(),
+            createdBy: user?.primaryEmailAddress?.emailAddress,
+            createdAt: moment().format("DD/MM/YYYY"),
+          })
+          .returning({ id: JsonForms.id });
+        console.log(`New form ID ${response[0].id}`);
+        if (response[0].id) {
+          await incrementFormCount(user.id);
+          route.push("/edit-form/" + response[0].id);
+        }
+        console.log(result.response.text());
+        setLoading(false);
       }
+    } catch (error) {
+      console.log(error);
+    } finally {
       setLoading(false);
     }
-
-    setLoading(false);
-    console.log(result.response.text());
   };
 
   useEffect(() => {
@@ -86,6 +106,16 @@ const CreateForm = ({ isPro, className }) => {
     checkLimit();
   }, [user?.id]);
 
+  const handleInputType = (e) => {
+    const { name, value } = e.target;
+    console.log(`value`, value);
+    setInputTypes({
+      ...inputTypes,
+      [name]: Number(value),
+    });
+  };
+  console.log(inputTypes);
+
   return (
     <div>
       <>
@@ -108,6 +138,63 @@ const CreateForm = ({ isPro, className }) => {
                 />
               </DialogDescription>
             </DialogHeader>
+
+            <DialogHeader>
+              <DialogTitle>Select Input Types</DialogTitle>
+              <DialogDescription>
+                Select how many{" "}
+                {`{inputs / checkbox /select dropdown / radio
+                buttons}`}{" "}
+                you want in the form
+              </DialogDescription>
+            </DialogHeader>
+            {/* // ! Options for Selects */}
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="text" className="text-right">
+                Input Field
+              </Label>
+              <Input
+                onChange={(e) => handleInputType(e)}
+                name="text"
+                placeholder="Enter the Number of fields you want"
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="checkbox" className="text-right">
+                Checkbox
+              </Label>
+              <Input
+                onChange={(e) => handleInputType(e)}
+                name="checkbox"
+                placeholder="Enter the Number of fields you want"
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="radio" className="text-right">
+                Radio Buttons
+              </Label>
+              <Input
+                onChange={(e) => handleInputType(e)}
+                name="radio"
+                placeholder="Enter the Number of fields you want"
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="select" className="text-right">
+                Select
+              </Label>
+              <Input
+                onChange={(e) => handleInputType(e)}
+                name="select"
+                placeholder="Enter the Number of fields you want"
+                className="col-span-3"
+              />
+            </div>
+
+            {/* //! end of select options */}
             <div className="flex gap-2 justify-end">
               <Button
                 variant="destructive"

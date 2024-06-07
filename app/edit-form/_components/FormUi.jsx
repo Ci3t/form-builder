@@ -13,12 +13,13 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import EditField from "./EditField";
 import { useRef, useState } from "react";
 import { db } from "@/configs";
-import { userResponses } from "@/configs/schema";
+import { JsonForms, userResponses } from "@/configs/schema";
 import moment from "moment";
 import { toast } from "sonner";
 import { SignInButton, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
+import { AiChatSession } from "@/configs/AiModal";
 
 function FormUi({
   jsonform,
@@ -32,7 +33,39 @@ function FormUi({
 }) {
   const [formData, setFormData] = useState();
   const { user, isSignedIn } = useUser();
+  // const [userInput, setUserInput] = useState("");
   let formRef = useRef();
+
+  // const PROMPT =
+  // ", On the basis of the description and the provided json  please give form in json format with form title,form subheading with form having form field,form name,placeholder name,and form label,fieldType,field required in Json format also keep the json format in this order the formFields as array,formSubheading as string,formTitle as string inside the formfields objects key names are fieldName,fieldType,label,placeholder,required,options and keep options as an array with the value dont add a label inside";
+  // const onEditingForm = async () => {
+
+  //   setLoading(true);
+  //   const result = await AiChatSession.sendMessage(
+  //     "Description:" + userInput + PROMPT
+  //   );
+
+  //   if (result.response.text()) {
+  //     const response = await db
+  //       .insert(JsonForms)
+  //       .values({
+  //         jsonform: result.response.text(),
+  //         createdBy: user?.primaryEmailAddress?.emailAddress,
+  //         createdAt: moment().format("DD/MM/YYYY"),
+  //       })
+  //       .returning({ id: JsonForms.id });
+  //     console.log(`New form ID ${response[0].id}`);
+  //     if (response[0].id) {
+  //       await incrementFormCount(user.id);
+  //       route.push("/edit-form/" + response[0].id);
+  //     }
+  //     setLoading(false);
+  //   }
+
+  //   setLoading(false);
+  //   console.log(result.response.text());
+  // };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
