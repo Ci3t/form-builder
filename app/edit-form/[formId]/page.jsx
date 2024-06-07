@@ -42,11 +42,17 @@ function EditForm({ params }) {
     setSelectedBorder(JSON.parse(res[0].style));
   };
   const onFieldUpdate = (value, i) => {
+    const editedOptionsString =
+      typeof value.options === "string"
+        ? value.options.split(",")
+        : value.options; // Join all elements into a single string
+    const editedOptionsArray = editedOptionsString.map((option) => option); // Split the string into an array and trim each option
+
     jsonForm.formFields[i].label = value.label;
     jsonForm.formFields[i].placeholder = value.placeholder;
-    setUpdateTrigger(Date.now());
+    jsonForm.formFields[i].options = editedOptionsArray;
 
-    console.log(jsonForm.formFields[i]);
+    setUpdateTrigger(Date.now());
   };
   useEffect(() => {
     if (updateTrigger) {

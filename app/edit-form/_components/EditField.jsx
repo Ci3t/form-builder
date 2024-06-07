@@ -23,12 +23,39 @@ import {
 function EditField({ defaultValue, onUpdate, deleteField }) {
   const [label, setLabel] = useState(defaultValue?.label);
   const [placeholder, setPlaceholder] = useState(defaultValue?.placeholder);
+  const [options, setOptions] = useState(
+    Array.isArray(defaultValue?.options) ? defaultValue.options : []
+  );
+  const [tags, setTags] = useState([]);
 
+  const addTags = () => {
+    // setTags(["Empty"]);
+    if (options.length === 0 || options[options.length - 1] !== "") {
+      setOptions((prevOptions) => [...prevOptions, "Empty"]);
+    }
+  };
+  const handleOptionChange = (e, index) => {
+    const newOptions = [...options];
+    const value = e.target.value.trim();
+
+    if (value !== "") {
+      newOptions[index] = value;
+      setOptions(newOptions);
+    }
+
+    console.log(`newOptions`, newOptions[index]);
+  };
+
+  const handleOptionDelete = (id) => {
+    const deleted = options?.filter((option, i) => id != i);
+    setOptions(deleted);
+  };
+  console.log(`options`, options);
+  console.log(defaultValue);
   return (
     <div className="flex gap-2">
       <Popover>
         <PopoverTrigger>
-          {" "}
           <Edit className="h-6 w-6 text-gray-500 cursor-pointer" />
         </PopoverTrigger>
         <PopoverContent>
@@ -53,18 +80,41 @@ function EditField({ defaultValue, onUpdate, deleteField }) {
               onChange={(e) => setPlaceholder(e.target.value)}
             />
           </div>
-          <Button
-            size="sm"
-            className="mt-3"
-            onClick={() =>
-              onUpdate({
-                label,
-                placeholder,
-              })
-            }
-          >
-            Update
-          </Button>
+          <div>
+            <label className="text-xs" htmlFor="">
+              Select Option
+            </label>
+            {options?.map((option, i) => (
+              <div className="mt-2 flex gap-2" key={i}>
+                <Input
+                  type="text"
+                  defaultValue={option}
+                  onChange={(e) => handleOptionChange(e, i)}
+                />
+                <Button onClick={() => handleOptionDelete(i)} size="sm">
+                  Delete
+                </Button>
+              </div>
+            ))}
+          </div>
+          <div className="flex justify-between items-center">
+            <Button
+              size="sm"
+              className="mt-3"
+              onClick={() =>
+                onUpdate({
+                  label,
+                  placeholder,
+                  options,
+                })
+              }
+            >
+              Update
+            </Button>
+            <Button onClick={addTags} className={"mt-3"} size="sm">
+              Add
+            </Button>
+          </div>
         </PopoverContent>
       </Popover>
 
