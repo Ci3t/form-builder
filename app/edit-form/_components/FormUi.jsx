@@ -20,6 +20,7 @@ import { SignInButton, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import { AiChatSession } from "@/configs/AiModal";
+import { eq } from "drizzle-orm";
 
 function FormUi({
   jsonform,
@@ -74,7 +75,6 @@ function FormUi({
   };
   const onFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
     const res = await db.insert(userResponses).values({
       jsonResponse: formData,
@@ -89,6 +89,34 @@ function FormUi({
       toast("Error while saving your form");
     }
   };
+
+  // const handleAddField = async () => {
+  //   const formId = jsonform?.id;
+  //   const currentForm = await db
+  //     .select()
+  //     .from(JsonForms)
+  //     .where(eq(JsonForms.id, formId));
+  //   const currentFormFields = currentForm.jsonform?.formFields || [];
+
+  //   const newField = {
+  //     fieldName: "firstName",
+  //     fieldType: "text",
+  //     label: "First Name",
+  //     placeholder: "Enter your first name",
+  //     required: true,
+  //   };
+
+  //   const updatedFormFields = [...currentFormFields, newField];
+  //   const res = await db
+  //     .update(JsonForms)
+  //     .set({
+  //       jsonform: {
+  //         ...currentForm.jsonform,
+  //         formFields: updatedFormFields,
+  //       },
+  //     })
+  //     .where(eq(JsonForms.id, formId));
+  // };
   return (
     <form
       ref={(e) => (formRef = e)}
@@ -194,20 +222,28 @@ function FormUi({
           )}
         </div>
       ))}
-      {!enableSignIn ? (
-        <button
-          type={path.includes("/edit-form") ? "button" : "submit"}
-          className="btn btn-primary"
-        >
-          Submit
-        </button>
-      ) : isSignedIn ? (
-        <button className="btn btn-primary">Submit</button>
-      ) : (
-        <Button>
-          <SignInButton mode="modal">Sign In before Submit</SignInButton>
-        </Button>
-      )}
+      <div className="flex justify-between">
+        {!enableSignIn ? (
+          <button
+            type={path.includes("/edit-form") ? "button" : "submit"}
+            className="btn btn-primary"
+          >
+            Submit
+          </button>
+        ) : isSignedIn ? (
+          <button className="btn btn-primary">Submit</button>
+        ) : (
+          <Button>
+            <SignInButton mode="modal">Sign In before Submit</SignInButton>
+          </Button>
+        )}
+
+        {/* {path.includes("/edit-form") && (
+          <button onClick={handleAddField} className="btn btn-secondary">
+            Add
+          </button>
+        )} */}
+      </div>
     </form>
   );
 }

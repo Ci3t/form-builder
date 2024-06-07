@@ -26,10 +26,10 @@ function EditField({ defaultValue, onUpdate, deleteField }) {
   const [options, setOptions] = useState(
     Array.isArray(defaultValue?.options) ? defaultValue.options : []
   );
-  const [tags, setTags] = useState([]);
 
   const addTags = () => {
     // setTags(["Empty"]);
+
     if (options.length === 0 || options[options.length - 1] !== "") {
       setOptions((prevOptions) => [...prevOptions, "Empty"]);
     }
@@ -42,16 +42,13 @@ function EditField({ defaultValue, onUpdate, deleteField }) {
       newOptions[index] = value;
       setOptions(newOptions);
     }
-
-    console.log(`newOptions`, newOptions[index]);
   };
 
   const handleOptionDelete = (id) => {
     const deleted = options?.filter((option, i) => id != i);
     setOptions(deleted);
   };
-  console.log(`options`, options);
-  console.log(defaultValue);
+
   return (
     <div className="flex gap-2">
       <Popover>
@@ -70,33 +67,37 @@ function EditField({ defaultValue, onUpdate, deleteField }) {
               onChange={(e) => setLabel(e.target.value)}
             />
           </div>
-          <div>
-            <label className="text-xs" htmlFor="">
-              Placeholder
-            </label>
-            <Input
-              type="text"
-              defaultValue={defaultValue.placeholder}
-              onChange={(e) => setPlaceholder(e.target.value)}
-            />
-          </div>
-          <div>
-            <label className="text-xs" htmlFor="">
-              Select Option
-            </label>
-            {options?.map((option, i) => (
-              <div className="mt-2 flex gap-2" key={i}>
-                <Input
-                  type="text"
-                  defaultValue={option}
-                  onChange={(e) => handleOptionChange(e, i)}
-                />
-                <Button onClick={() => handleOptionDelete(i)} size="sm">
-                  Delete
-                </Button>
-              </div>
-            ))}
-          </div>
+          {defaultValue?.fieldType === "text" && (
+            <div>
+              <label className="text-xs" htmlFor="">
+                Placeholder
+              </label>
+              <Input
+                type="text"
+                defaultValue={defaultValue.placeholder}
+                onChange={(e) => setPlaceholder(e.target.value)}
+              />
+            </div>
+          )}
+          {defaultValue?.fieldType !== "text" && (
+            <div>
+              <label className="text-xs" htmlFor="">
+                Select Option
+              </label>
+              {options?.map((option, i) => (
+                <div className="mt-2 flex gap-2" key={i}>
+                  <Input
+                    type="text"
+                    defaultValue={option}
+                    onChange={(e) => handleOptionChange(e, i)}
+                  />
+                  <Button onClick={() => handleOptionDelete(i)} size="sm">
+                    Delete
+                  </Button>
+                </div>
+              ))}
+            </div>
+          )}
           <div className="flex justify-between items-center">
             <Button
               size="sm"
@@ -111,9 +112,12 @@ function EditField({ defaultValue, onUpdate, deleteField }) {
             >
               Update
             </Button>
-            <Button onClick={addTags} className={"mt-3"} size="sm">
-              Add
-            </Button>
+
+            {defaultValue?.fieldType !== "text" && (
+              <Button onClick={addTags} className={"mt-3"} size="sm">
+                Add
+              </Button>
+            )}
           </div>
         </PopoverContent>
       </Popover>
