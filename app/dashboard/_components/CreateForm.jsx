@@ -151,7 +151,7 @@ const CreateForm = ({ isPro, className }) => {
             {/* // ! Options for Selects */}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="text" className="text-right">
-                Input Field
+                Input Fields
               </Label>
               <Input
                 onChange={(e) => handleInputType(e)}
@@ -162,7 +162,7 @@ const CreateForm = ({ isPro, className }) => {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="checkbox" className="text-right">
-                Checkbox
+                Checkbox Buttons
               </Label>
               <Input
                 onChange={(e) => handleInputType(e)}
@@ -184,7 +184,7 @@ const CreateForm = ({ isPro, className }) => {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="select" className="text-right">
-                Select
+                Select Dropdowns
               </Label>
               <Input
                 onChange={(e) => handleInputType(e)}

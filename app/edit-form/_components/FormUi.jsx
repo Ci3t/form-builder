@@ -91,12 +91,17 @@ function FormUi({
   };
 
   // const handleAddField = async () => {
-  //   const formId = jsonform?.id;
+  //   const formId = Number(path.split("/")[2]);
+  //   console.log("formId", formId);
   //   const currentForm = await db
   //     .select()
   //     .from(JsonForms)
   //     .where(eq(JsonForms.id, formId));
-  //   const currentFormFields = currentForm.jsonform?.formFields || [];
+  //   const currentFormFields =
+  //     JSON.parse(await currentForm.jsonform?.formFields) || [];
+
+  //   console.log(`currentForm`, currentForm);
+  //   console.log(`currentFormFields`, currentFormFields);
 
   //   const newField = {
   //     fieldName: "firstName",
@@ -107,6 +112,7 @@ function FormUi({
   //   };
 
   //   const updatedFormFields = [...currentFormFields, newField];
+  //   console.log(`updatedFormFields`, updatedFormFields);
   //   const res = await db
   //     .update(JsonForms)
   //     .set({
@@ -116,6 +122,8 @@ function FormUi({
   //       },
   //     })
   //     .where(eq(JsonForms.id, formId));
+
+  //   console.log("res", res);
   // };
   return (
     <form
