@@ -78,18 +78,18 @@
       /* background-color: #FBFCF6; */
       /* background: linear-gradient(0deg,rgb(5, 43, 50), rgba(29,181,140,1) 0% 100%); */
 
-      background: radial-gradient(circle, #242424 10%, transparent 11%),radial-gradient(circle at bottom left, #242424 5%, transparent 6%),radial-gradient(circle at bottom right, #242424 5%, transparent 6%),radial-gradient(circle at top left, #242424 5%, transparent 6%),radial-gradient(circle at top right, #242424 5%, transparent 6%);
+      /* background: radial-gradient(circle, #242424 10%, transparent 11%),radial-gradient(circle at bottom left, #242424 5%, transparent 6%),radial-gradient(circle at bottom right, #242424 5%, transparent 6%),radial-gradient(circle at top left, #242424 5%, transparent 6%),radial-gradient(circle at top right, #242424 5%, transparent 6%);
       background-size: 1em 1em;
       background-color: #000000;
-      opacity: 1
+       */
     }
-    .glow {
+    /* .glow {
       @apply absolute top-1/2 left-1/2 w-full h-full;
       background: radial-gradient(circle, rgba(123, 67, 255, 0.6), transparent 60%);
       filter: blur(100px);
       transform: translate(-80%, -50%);
       z-index: 0;
-    }
+    } */
   }
  
   

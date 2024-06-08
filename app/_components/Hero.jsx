@@ -3,9 +3,9 @@ import Link from "next/link";
 
 function Hero() {
   return (
-    <section className=" bg-gradient-to-t from-gray-900 to-black ">
-      <div className="mx-auto  max-w-screen-xl px-4  lg:flex lg:h-screen ">
-        <div className="mx-auto max-w-xl text-center flex  items-center  flex-col">
+    <section className="z-10">
+      <div className="mx-auto  max-w-screen-xl px-4  lg:flex lg:h-screen z-10">
+        <div className="mx-auto max-w-xl text-center flex  items-center  flex-col z-10">
           <Image src={"/FormAiLogo.png"} width={500} height={500} />
           <h1 className="text-3xl font-light sm:text-5xl bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gray-400 via-gray-200 to-sky-100 bg-clip-text text-transparent">
             Create Forms Effortlessly

@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     !path.includes("live-form") && (
-      <div className="p-5 border-b border-b-blue-950 shadow-sm bg-gradient-to-t from-gray-900 to-black">
+      <div className="p-5 border-b border-b-blue-950 shadow-sm bg-gradient-to-t from-gray-900 to-black z-15">
         <div className="flex items-center justify-between">
           <Link href={"/"}>
             <Image src={"/logo.png"} width={180} height={50} alt="logo" />
