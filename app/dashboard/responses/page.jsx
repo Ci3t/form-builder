@@ -25,7 +25,7 @@ function Responses() {
 
   return (
     <div className="p-10">
-      <h2 className="font-bold text-2xl flex items-center justify-between">
+      <h2 className="font-bold text-2xl flex items-center justify-between text-white">
         Responses
       </h2>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">

@@ -38,26 +38,25 @@ function Upgrade() {
 
   return (
     <div className="p-10">
-      <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center md:gap-8">
+      <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 ">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center md:gap-8 ">
           {Pricing.map((price, i) => (
             <div
               key={i + price.price}
-              className="rounded-2xl border border-gray-200 p-6 shadow-sm sm:px-8 lg:p-12"
+              className="  sm:px-8 lg:p-12 shadow-sm shadow-indigo-400 rounded-lg p-4 bg-[#472B89] h-full w-full  bg-clip-padding backdrop-filter  backdrop-blur bg-opacity-15 backdrop-saturate-50 backdrop-contrast-100 border-[1px] border-violet-300 border-opacity-30"
             >
               <div className="text-center">
-                <h2 className="text-lg font-medium text-gray-900">
+                <h2 className="text-lg font-medium text-[#FBFCF6]">
                   {price.duration}
-                  <span className="sr-only">Plan</span>
                 </h2>
 
                 <p className="mt-2 sm:mt-4">
-                  <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
+                  <strong className="text-3xl font-bold text-violet-300 sm:text-4xl">
                     {" "}
                     {price.price}$
                   </strong>
 
-                  <span className="text-sm font-medium text-gray-700">
+                  <span className="text-sm font-medium text-[#FBFCF6]">
                     /{price.duration}
                   </span>
                 </p>
@@ -71,7 +70,7 @@ function Upgrade() {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className="size-5 text-indigo-700"
+                    className="size-5 text-purple-400"
                   >
                     <path
                       strokeLinecap="round"
@@ -80,7 +79,7 @@ function Upgrade() {
                     />
                   </svg>
 
-                  <span className="text-gray-700"> Infinite Forms </span>
+                  <span className="text-[#FBFCF6]"> Infinite Forms </span>
                 </li>
 
                 <li className="flex items-center gap-1">
@@ -90,7 +89,7 @@ function Upgrade() {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className="size-5 text-indigo-700"
+                    className="size-5 text-purple-400"
                   >
                     <path
                       strokeLinecap="round"
@@ -99,7 +98,7 @@ function Upgrade() {
                     />
                   </svg>
 
-                  <span className="text-gray-700"> No Limit </span>
+                  <span className="text-[#FBFCF6]"> No Limit </span>
                 </li>
 
                 <li className="flex items-center gap-1">
@@ -109,7 +108,7 @@ function Upgrade() {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className="size-5 text-indigo-700"
+                    className="size-5 text-purple-400"
                   >
                     <path
                       strokeLinecap="round"
@@ -118,7 +117,7 @@ function Upgrade() {
                     />
                   </svg>
 
-                  <span className="text-gray-700"> Email support </span>
+                  <span className="text-[#FBFCF6]"> Email support </span>
                 </li>
 
                 <li className="flex items-center gap-1">
@@ -128,7 +127,7 @@ function Upgrade() {
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className="size-5 text-indigo-700"
+                    className="size-5 text-purple-400"
                   >
                     <path
                       strokeLinecap="round"
@@ -137,7 +136,7 @@ function Upgrade() {
                     />
                   </svg>
 
-                  <span className="text-gray-700"> Help center access </span>
+                  <span className="text-[#FBFCF6]"> Help center access </span>
                 </li>
               </ul>
 

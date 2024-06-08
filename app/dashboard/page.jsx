@@ -17,7 +17,7 @@ const Dashboard = async () => {
   return (
     <>
       <div className="p-10 ">
-        <h2 className="font-bold text-2xl flex items-center justify-between text-[#1D3853] border-b border-b-slate-500 pb-2">
+        <h2 className="font-bold text-2xl flex items-center justify-between text-white border-b border-b-slate-500 pb-2">
           Dashboard
           <CreateForm isPro={isPro} />
         </h2>

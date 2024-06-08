@@ -122,7 +122,7 @@ const CreateForm = ({ isPro, className }) => {
         <Button
           className={
             className +
-            " bg-[#472B89]  text-white hover:bg-[#000] hover:text-[#fff] hover:border-2 hover:border-[#472B89] border-transparent border-[2px]"
+            " bg-[#472B89]  text-white hover:bg-[#FBFCF6] hover:text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px]"
           }
           disabled={!canCreate && !isPro}
           onClick={() => setOpenDialog(true)}

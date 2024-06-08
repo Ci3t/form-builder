@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { CircleX, FilePenLine, Share2 } from "lucide-react";
+import { FilePenLine, Share2, Trash } from "lucide-react";
 import Link from "next/link";
 import { RWebShare } from "react-web-share";
 import {
@@ -37,13 +37,13 @@ function SubForm({ form, formRecord, refreshData }) {
     }
   };
   return (
-    <div className="border shadow-md rounded-lg p-4 bg-[#f6f7f0]">
+    <div className="shadow-sm shadow-indigo-400 rounded-lg p-4 bg-[#472B89] h-full w-full  bg-clip-padding backdrop-filter  backdrop-blur bg-opacity-20 backdrop-saturate-50 backdrop-contrast-100 border-[1px] border-violet-300 border-opacity-30">
       <div className="flex justify-between">
         <h2></h2>
 
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <CircleX className="h-5 w-5 text-red-600 cursor-pointer hover:scale-105 transition-all" />
+            <Trash className="h-5 w-5 text-purple-400 cursor-pointer hover:scale-105 transition-all " />
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
@@ -62,8 +62,8 @@ function SubForm({ form, formRecord, refreshData }) {
           </AlertDialogContent>
         </AlertDialog>
       </div>
-      <h2 className="text-lg">{form?.formTitle}</h2>
-      <h2 className="text-sm text-gray-500">{form?.formSubheading}</h2>
+      <h2 className="text-lg text-white">{form?.formTitle}</h2>
+      <h2 className="text-sm text-violet-300">{form?.formSubheading}</h2>
       <hr className="my-4" />
       <div className="flex justify-between">
         <RWebShare
@@ -75,7 +75,11 @@ function SubForm({ form, formRecord, refreshData }) {
           }}
           onClick={() => console.log("shared successfully!")}
         >
-          <Button variant="outline" size="sm" className="flex gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex gap-2  hover:bg-[#472B89]  hover:text-[#FBFCF6] bg-[#FBFCF6] text-[#472B89]  hover:border hover:border-[#472B89]  border-transparent border-[1px]"
+          >
             <Share2 className="h-5 w-5" />
             Share
           </Button>
@@ -83,7 +87,7 @@ function SubForm({ form, formRecord, refreshData }) {
         <Link href={"/edit-form/" + formRecord?.id}>
           <Button
             size="sm"
-            className="flex gap-2  bg-[#1D3853] text-white hover:bg-[#FBFCF6] hover:text-[#1D3853] hover:border hover:border-[#1D3853] border-transparent border-[1px]"
+            className="flex gap-2  bg-[#472B89]  text-[#FBFCF6] hover:bg-[#FBFCF6] hover:text-[#472B89]  hover:border hover:border-[#472B89]  border-transparent border-[1px]"
           >
             <FilePenLine className="h-5 w-5" /> Edit
           </Button>

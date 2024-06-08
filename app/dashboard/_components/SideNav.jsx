@@ -51,14 +51,16 @@ function SideNav({ isPro }) {
   };
 
   return (
-    <div className="h-screen shadow-md border-r bg-gradient-to-t to-[#FBFCF6] from-[#23C687]">
+    <div className="h-screen shadow-md border-r border-r-violet-800 shadow-violet-800 bg-[radial-gradient(circle,_#242424_10%,_transparent_11%),radial-gradient(circle_at_bottom_left,_#242424_5%,_transparent_6%),radial-gradient(circle_at_bottom_right,_#242424_5%,_transparent_6%),radial-gradient(circle_at_top_left,_#242424_5%,_transparent_6%),radial-gradient(circle_at_top_right,_#242424_5%,_transparent_6%)] [background-size:1em_1em] bg-[#000000]">
+      <div className="absolute top-2/4 left-2/4 w-full bg-[radial-gradient(circle,_rgba(123,_67,_255,_0.6),_transparent_60%)] filter blur-[100px] -translate-x-[70%] -translate-y-[10%] z-0 h-full"></div>
+      <div className="relative z-12"></div>
       <div className="p-5">
         {menu.map((m, i) => (
           <Link
             href={m.path}
             key={i}
-            className={`flex items-center gap-3 mb-3 p-4 hover:bg-[#1D3853] hover:text-white rounded-lg cursor-pointer text-gray-900 ${
-              path == m.path && "bg-[#1D3853] text-white"
+            className={`flex items-center gap-3 mb-3 p-4 hover:bg-[#472B89] hover:text-[#FBFCF6] rounded-lg cursor-pointer text-white ${
+              path == m.path && "bg-[#472B89] text-[#FBFCF6]"
             }`}
           >
             <m.icon />
@@ -71,7 +73,7 @@ function SideNav({ isPro }) {
           <CreateForm isPro={isPro} className={"w-full"} />
         </div>
         {isPro ? (
-          <h2 className="text-sm mt-2 text-gray-600 text-center">
+          <h2 className="text-sm mt-2 text-violet-200 text-center">
             Pro Account
           </h2>
         ) : (

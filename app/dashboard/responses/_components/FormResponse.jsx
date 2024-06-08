@@ -54,22 +54,27 @@ function FormResponse({ form, formRecord }) {
     XLSX.writeFile(workbook, form?.formTitle + ".xlsx");
   };
   return (
-    <div className="border shadow-sm rounded-lg p-4 my-5">
-      <h2 className="text-lg">{form?.formTitle}</h2>
-      <h2 className="text-sm text-gray-500">{form?.formSubheading}</h2>
+    <div className="shadow-sm shadow-indigo-400 rounded-lg p-4 bg-[#472B89] h-full w-full  bg-clip-padding backdrop-filter  backdrop-blur bg-opacity-20 backdrop-saturate-50 backdrop-contrast-100 border-[1px] border-violet-300 border-opacity-30 my-5">
+      <h2 className="text-lg text-[#FBFCF6]">{form?.formTitle}</h2>
+      <h2 className="text-sm text-violet-300">{form?.formSubheading}</h2>
       <hr className="my-4" />
       <div className="flex justify-between">
-        <h2 className="text-sm flex gap-1">
+        <h2 className="text-sm text-[#FBFCF6] flex gap-1">
           {resCount?.map((res, i) => (
-            <div key={i}>
+            <div className="text-[#b59ee9] " key={i}>
               {formRecord.id == res.formId && <b>{res.responseCount}</b>}
             </div>
           ))}
           Repsonses
         </h2>
         <div className="flex gap-2 justify-center items-center">
-          <Button size="sm" onClick={() => exportData()} disabled={loading}>
-            {loading ? <LoaderPinwheel className="animate-spin" /> : "Export"}
+          <Button
+            className=" bg-[#472B89]  text-[#FBFCF6] hover:bg-[#FBFCF6] hover:text-[#472B89]  hover:border hover:border-[#472B89]  border-transparent border-[1px]"
+            size="sm"
+            onClick={() => exportData()}
+            disabled={loading}
+          >
+            {loading ? <LoaderPinwheel className="animate-spin " /> : "Export"}
           </Button>
         </div>
       </div>

@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     !path.includes("live-form") && (
-      <div className="p-5 border-b border-b-blue-950 shadow-sm bg-gradient-to-t from-gray-900 to-black z-15">
+      <div className="p-5 border-b border-b-violet-950 ">
         <div className="flex items-center justify-between">
           <Link href={"/"}>
             <Image src={"/logo.png"} width={180} height={50} alt="logo" />
@@ -23,7 +23,7 @@ const Header = () => {
               <Link href={"/dashboard"}>
                 <Button
                   size="sm"
-                  className="bg-[#76a22f] btn text-white hover:bg-[#407c35]"
+                  className="bg-[#472B89]  text-white hover:bg-[#FBFCF6] hover:text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px] "
                 >
                   Dashaboard
                 </Button>
@@ -33,7 +33,7 @@ const Header = () => {
           ) : (
             <SignInButton>
               <Button
-                className="bg-[#76a22f] btn text-white hover:bg-[#407c35]"
+                className="bg-[#472B89]  text-white hover:bg-[#FBFCF6] hover:text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px] "
                 size="sm"
               >
                 Get Started
