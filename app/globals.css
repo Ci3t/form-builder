@@ -69,9 +69,19 @@
   @layer base {
     * {
       @apply border-border;
+    
+   
     }
     body {
       @apply bg-background text-foreground;
       min-height: 100vh;
+      background-color: #FBFCF6;
+      /* background: linear-gradient(0deg,rgba(0,57,68,0.5), rgba(29,181,140,1) 0% 100%);
+ */
+
     }
   }
+  /* ::-webkit-scrollbar {
+    display: none;
+  } */
+  

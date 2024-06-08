@@ -51,14 +51,14 @@ function SideNav({ isPro }) {
   };
 
   return (
-    <div className="h-screen shadow-md border">
+    <div className="h-screen shadow-md border-r bg-gradient-to-t to-[#FBFCF6] from-[#23C687]">
       <div className="p-5">
         {menu.map((m, i) => (
           <Link
             href={m.path}
             key={i}
-            className={`flex items-center gap-3 mb-3 p-4 hover:bg-primary hover:text-white rounded-lg cursor-pointer text-gray-500 ${
-              path == m.path && "bg-primary text-white"
+            className={`flex items-center gap-3 mb-3 p-4 hover:bg-[#1D3853] hover:text-white rounded-lg cursor-pointer text-gray-900 ${
+              path == m.path && "bg-[#1D3853] text-white"
             }`}
           >
             <m.icon />

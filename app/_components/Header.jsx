@@ -12,22 +12,32 @@ const Header = () => {
 
   return (
     !path.includes("live-form") && (
-      <div className="p-5 border-b shadow-sm">
+      <div className="p-5 border-b border-b-blue-950 shadow-sm bg-gradient-to-t from-gray-900 to-black">
         <div className="flex items-center justify-between">
           <Link href={"/"}>
-            <Image src={"/logo.svg"} width={180} height={50} alt="logo" />
+            <Image src={"/logo.png"} width={180} height={50} alt="logo" />
           </Link>
 
           {isSignedIn ? (
             <div className="flex items-center  gap-5">
               <Link href={"/dashboard"}>
-                <Button variant="outline">Dashaboard</Button>
+                <Button
+                  size="sm"
+                  className="bg-[#76a22f] btn text-white hover:bg-[#407c35]"
+                >
+                  Dashaboard
+                </Button>
               </Link>
               <UserButton />
             </div>
           ) : (
             <SignInButton>
-              <Button>Get Started</Button>
+              <Button
+                className="bg-[#76a22f] btn text-white hover:bg-[#407c35]"
+                size="sm"
+              >
+                Get Started
+              </Button>
             </SignInButton>
           )}
         </div>
