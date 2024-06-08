@@ -28,7 +28,7 @@ function Responses() {
       <h2 className="font-bold text-2xl flex items-center justify-between text-white">
         Responses
       </h2>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {forms.map((form, i) => (
           <FormResponse
             key={i + form}

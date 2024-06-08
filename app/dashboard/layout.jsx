@@ -8,7 +8,7 @@ const DashboardLayout = async ({ children }) => {
   return (
     <SignedIn>
       <div>
-        <div className="md:w-64 fixed">
+        <div className="md:w-64 md:fixed md:inline-block hidden ">
           <SideNav isPro={isPro} />
         </div>
         <div className="md:ml-64"> {children}</div>

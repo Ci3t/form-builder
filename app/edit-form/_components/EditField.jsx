@@ -52,8 +52,8 @@ function EditField({ defaultValue, onUpdate, deleteField }) {
   return (
     <div className="flex gap-2">
       <Popover>
-        <PopoverTrigger>
-          <Edit className="h-6 w-6 text-gray-500 cursor-pointer" />
+        <PopoverTrigger className="">
+          <Edit className="h-6 w-6 cursor-pointer " />
         </PopoverTrigger>
         <PopoverContent>
           <h2>Edit Fields</h2>
@@ -85,13 +85,17 @@ function EditField({ defaultValue, onUpdate, deleteField }) {
                 Select Option
               </label>
               {options?.map((option, i) => (
-                <div className="mt-2 flex gap-2" key={i}>
+                <div className="mt-2 flex gap-2 bg-[#FBFCF6]" key={i}>
                   <Input
                     type="text"
                     defaultValue={option}
                     onChange={(e) => handleOptionChange(e, i)}
                   />
-                  <Button onClick={() => handleOptionDelete(i)} size="sm">
+                  <Button
+                    className="hover:bg-[#472B89] hover:text-white bg-[#FBFCF6] text-[#472B89] border-2 border-[#472B89] hover:border-transparent hover:border-[2px]"
+                    onClick={() => handleOptionDelete(i)}
+                    size="sm"
+                  >
                     Delete
                   </Button>
                 </div>
@@ -101,7 +105,7 @@ function EditField({ defaultValue, onUpdate, deleteField }) {
           <div className="flex justify-between items-center">
             <Button
               size="sm"
-              className="mt-3"
+              className="mt-3 bg-[#472B89]  text-white hover:bg-[#FBFCF6] hover:text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px]"
               onClick={() =>
                 onUpdate({
                   label,
@@ -114,7 +118,13 @@ function EditField({ defaultValue, onUpdate, deleteField }) {
             </Button>
 
             {defaultValue?.fieldType !== "text" && (
-              <Button onClick={addTags} className={"mt-3"} size="sm">
+              <Button
+                onClick={addTags}
+                className={
+                  "mt-3 bg-[#472B89]  text-white hover:bg-[#FBFCF6] hover:text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px]"
+                }
+                size="sm"
+              >
                 Add
               </Button>
             )}

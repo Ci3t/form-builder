@@ -59,8 +59,8 @@ function SideNav({ isPro }) {
           <Link
             href={m.path}
             key={i}
-            className={`flex items-center gap-3 mb-3 p-4 hover:bg-[#472B89] hover:text-[#FBFCF6] rounded-lg cursor-pointer text-white ${
-              path == m.path && "bg-[#472B89] text-[#FBFCF6]"
+            className={`flex items-center gap-3 mb-3 p-4 hover:bg-[#472B89] hover:text-[#FBFCF6] rounded-lg cursor-pointer w-[90%] text-white ${
+              path == m.path && "bg-[#472B89] text-[#FBFCF6] w-[90%]"
             }`}
           >
             <m.icon />

@@ -114,7 +114,7 @@ function EditForm({ params }) {
         </h2>
         <div className="flex gap-2">
           <Link href={"/live-form/" + record?.id} target="_blank">
-            <Button className="flex gap-2 ">
+            <Button className="flex gap-2 bg-[#472B89]  text-white hover:bg-[#FBFCF6] hover:text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px]">
               <ScanEye /> Preview
             </Button>
           </Link>
@@ -127,7 +127,7 @@ function EditForm({ params }) {
             }}
             onClick={() => console.log("shared successfully!")}
           >
-            <Button className="flex gap-2 hover:bg-green-600 bg-green-800">
+            <Button className="flex gap-2 hover:bg-[#472B89]  hover:text-white bg-[#FBFCF6] text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px]">
               <Share2 />
               Share
             </Button>
@@ -135,7 +135,7 @@ function EditForm({ params }) {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <div className="p-5 border rounded-lg shadow-sm ">
+        <div className="p-5 border rounded-lg shadow-sm bg-[#FBFCF6]  ">
           <Controller
             selectedTheme={(val) => {
               updateFields(val, "theme");
@@ -156,7 +156,7 @@ function EditForm({ params }) {
           />
         </div>
         <div
-          className="md:col-span-2 border rounded-lg  p-5 flex items-center justify-center"
+          className="md:col-span-2 border rounded-lg  p-5 flex items-center justify-center bg-[#472B89] bg-opacity-50"
           style={{ backgroundImage: selectedBg }}
         >
           <FormUi

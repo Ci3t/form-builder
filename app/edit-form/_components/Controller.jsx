@@ -24,15 +24,16 @@ function Controller({
   return (
     <div>
       {/* Theme selection */}
-      <h2 className="my-1">Select Themes</h2>
+      <h2 className="my-1 ">Select Themes</h2>
+
       <Select onValueChange={(val) => selectedTheme(val)}>
-        <SelectTrigger className="w-full">
+        <SelectTrigger className="w-full text-purple-700">
           <SelectValue placeholder="Theme" />
         </SelectTrigger>
         <SelectContent>
           {Themes.map((theme, i) => (
             <SelectItem key={i + theme} value={theme.theme}>
-              <div className="flex gap-3">
+              <div className="flex gap-3 text-purple-700">
                 <div className="flex">
                   <div
                     className="h-5 w-5 rounded-l-md"
@@ -66,7 +67,7 @@ function Controller({
             i < showMore && (
               <div
                 key={i + bg.name}
-                className="w-full h-[70px] rounded-lg hover:border-black hover:border-2 cursor-pointer flex justify-center items-center"
+                className="w-full h-[70px] rounded-lg hover:border-black hover:border-2 cursor-pointer flex justify-center items-center border-2 border-violet-300"
                 style={{
                   background: bg.gradient,
                 }}
@@ -94,10 +95,10 @@ function Controller({
           {BorderStyle.map((border, i) => (
             <div
               key={i + border.name}
-              className="flex justify-center items-center flex-col"
+              className="flex justify-center items-center flex-col "
             >
               <div
-                className="cursor-pointer hover:border-2 rounded-lg  w-[70px] h-[70px]  flex justify-center items-center"
+                className="cursor-pointer hover:border-2 rounded-lg  w-[70px] h-[70px]  flex justify-center items-center "
                 style={{
                   boxShadow: border?.key == border?.key && border?.value,
                   border: border?.name == border?.name && border?.value,

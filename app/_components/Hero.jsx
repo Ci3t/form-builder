@@ -6,10 +6,15 @@ function Hero() {
     <section className="z-10">
       <div className="mx-auto  max-w-screen-xl px-4  lg:flex lg:h-screen z-10">
         <div className="mx-auto max-w-xl text-center flex  items-center  flex-col z-10">
-          <Image src={"/FormAiLogo.png"} width={500} height={500} />
+          <Image
+            src={"/FormAiLogo.png"}
+            width={500}
+            height={500}
+            className="drop-shadow-[5px_5px_0px_rgba(112,73,205,1)]"
+          />
           <h1 className="text-3xl font-light sm:text-5xl bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gray-400 via-gray-200 to-sky-100 bg-clip-text text-transparent">
             Create Forms Effortlessly
-            <strong className="font-bold  sm:block bg-gradient-to-tl from-[#355030] to-[#72B800] bg-clip-text text-transparent">
+            <strong className="font-bold  sm:block bg-gradient-to-tl from-[#3d11a4] to-[#f6f5f7] bg-clip-text text-transparent">
               Generate Custom Forms with AI Assistance
             </strong>
           </h1>
@@ -23,13 +28,13 @@ function Hero() {
 
           <div className="mt-8 flex flex-wrap justify-center gap-4 text-white">
             <div
-              className="block w-full rounded bg-primary px-12 py-3 text-sm font-medium text-white shadow hover:bg-[#72B800] focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
+              className="block w-full rounded bg-[#472B89]  px-12 py-3 text-sm font-medium text-white shadow hover:bg-[#FBFCF6]  hover:text-[#472B89] focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
               href="#"
             >
               <Link href={"/dashboard"}>Create AI Form</Link>
             </div>
             <a
-              className="block w-full rounded px-12 py-3 text-sm font-medium text-primary shadow hover:text-[#72B800] focus:outline-none focus:ring text-white active:text-red-500 sm:w-auto"
+              className="block w-full rounded px-12 py-3 text-sm font-medium text-primary shadow hover:text-[#8c68e0] focus:outline-none focus:ring text-white active:text-red-500 sm:w-auto"
               href="#"
             >
               Learn More
