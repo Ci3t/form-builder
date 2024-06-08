@@ -15,9 +15,12 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          <Header />
-          <Toaster />
-          {children}
+          <div className="glow"></div>
+          <div className="relative z-10">
+            <Header />
+            <Toaster />
+            {children}
+          </div>
         </body>
       </html>
     </ClerkProvider>
