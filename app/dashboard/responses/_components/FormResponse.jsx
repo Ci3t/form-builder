@@ -38,7 +38,7 @@ function FormResponse({ form, formRecord }) {
         jsonData.push(jsonRes);
       });
       setLoading(false);
-      console.log(jsonData);
+      console.log(`jsonData`, jsonData);
 
       exportToExcel(jsonData);
     }
@@ -101,11 +101,32 @@ function FormResponse({ form, formRecord }) {
   }, [ResData]);
 
   const exportToExcel = async (data) => {
-    const worksheet = XLSX.utils.json_to_sheet(data);
+    const filteredData = data.filter((item) => Object.keys(item).length > 0);
+    const worksheet = XLSX.utils.json_to_sheet(filteredData, {
+      header: Object.keys(filteredData[0]),
+    });
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
     XLSX.writeFile(workbook, form?.formTitle + ".xlsx");
+    console.log(`data`, filteredData);
   };
+
+  // {ResData.map((data) => (
+  //   <TableRow key={data.id}>
+  //     {Object.entries(data).map(([key, value]) => (
+  //       <TableCell
+  //         key={key}
+  //         className="px-6 py-4  border-violet-500 border-b text-[#FBFCF6]"
+  //       >
+  //         {Array.isArray(value) && value.length > 0
+  //           ? value.map((item) => item.label).join(", ")
+  //           : typeof value === "object"
+  //           ? value.label
+  //           : value}
+  //       </TableCell>
+  //     ))}
+  //   </TableRow>
+  // ))}
   return (
     <div className="shadow-sm shadow-indigo-400 rounded-lg p-4 bg-[#472B89] h-full w-full  bg-clip-padding backdrop-filter  backdrop-blur bg-opacity-20 backdrop-saturate-50 backdrop-contrast-100 border-[1px] border-violet-300 border-opacity-30 my-5">
       <h2 className="text-lg text-[#FBFCF6]">{form?.formTitle}</h2>
