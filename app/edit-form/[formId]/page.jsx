@@ -9,11 +9,11 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import FormUi from "../_components/FormUi";
 import { json } from "drizzle-orm/mysql-core";
-import { toast } from "sonner";
+
 import Controller from "../_components/Controller";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { RWebShare } from "react-web-share";
+import { useToast } from "@/components/ui/use-toast";
 
 function EditForm({ params }) {
   const { user } = useUser();
@@ -25,6 +25,7 @@ function EditForm({ params }) {
   const [selectedBorder, setSelectedBorder] = useState();
   const router = useRouter();
 
+  const { toast } = useToast();
   const getFormData = async () => {
     const res = await db
       .select()
@@ -118,19 +119,24 @@ function EditForm({ params }) {
               <ScanEye /> Preview
             </Button>
           </Link>
-          <RWebShare
-            data={{
-              text: jsonForm?.formSubheading,
-              url: "/live-form/" + record?.id,
-              title: jsonForm?.formTitle,
+
+          <Button
+            onClick={() => {
+              toast({
+                title: "Please Copy the Link and share it",
+                description: "Opening a new tab...",
+              });
+              setTimeout(() => {
+                window.open(`/live-form/${record?.id}`, "_blank");
+              }, 1000);
             }}
-            onClick={() => console.log("shared successfully!")}
+            className="flex gap-2 hover:bg-[#472B89] hover:text-white
+            bg-[#FBFCF6] text-[#472B89] hover:border-2 hover:border-[#472B89]
+            border-transparent border-[2px]"
           >
-            <Button className="flex gap-2 hover:bg-[#472B89]  hover:text-white bg-[#FBFCF6] text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px]">
-              <Share2 />
-              Share
-            </Button>
-          </RWebShare>
+            <Share2 />
+            Share
+          </Button>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { FilePenLine, Share2, Trash } from "lucide-react";
 import Link from "next/link";
-import { RWebShare } from "react-web-share";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,10 +17,12 @@ import { useUser } from "@clerk/nextjs";
 import { db } from "@/configs";
 import { JsonForms } from "@/configs/schema";
 import { and, eq } from "drizzle-orm";
-import { toast } from "sonner";
+import { toast as sonner } from "sonner";
+import { useToast } from "@/components/ui/use-toast";
 
 function SubForm({ form, formRecord, refreshData }) {
   const { user } = useUser();
+  const { toast } = useToast();
   const onDeleteForm = async () => {
     const res = await db
       .delete(JsonForms)
@@ -32,7 +34,7 @@ function SubForm({ form, formRecord, refreshData }) {
       );
 
     if (res) {
-      toast("Form Deleted!");
+      sonner("Form Deleted!");
       refreshData();
     }
   };
@@ -66,23 +68,24 @@ function SubForm({ form, formRecord, refreshData }) {
       <h2 className="text-sm text-violet-300">{form?.formSubheading}</h2>
       <hr className="my-4" />
       <div className="flex justify-between">
-        <RWebShare
-          data={{
-            text: form?.formSubheading,
-            url: "/live-form/" + formRecord?.id,
-            title: form?.formTitle,
+        <Button
+          onClick={() => {
+            toast({
+              title: "Please Copy the Link and share it",
+              description: "Opening a new tab...",
+            });
+            setTimeout(() => {
+              window.open(`/live-form/${formRecord?.id}`, "_blank");
+            }, 1000);
           }}
-          onClick={() => console.log("shared successfully!")}
+          variant="outline"
+          size="sm"
+          className="flex gap-2  hover:bg-[#472B89]  hover:text-[#FBFCF6] bg-[#FBFCF6] text-[#472B89]  hover:border hover:border-[#472B89]  border-transparent border-[1px]"
         >
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex gap-2  hover:bg-[#472B89]  hover:text-[#FBFCF6] bg-[#FBFCF6] text-[#472B89]  hover:border hover:border-[#472B89]  border-transparent border-[1px]"
-          >
-            <Share2 className="h-5 w-5" />
-            Share
-          </Button>
-        </RWebShare>
+          <Share2 className="h-5 w-5" />
+          Share
+        </Button>
+
         <Link href={"/edit-form/" + formRecord?.id}>
           <Button
             size="sm"

@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "./_components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner";
+import { Toaster as Toaster2 } from "@/components/ui/toaster";
 import { icons } from "lucide-react";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
             <Header />
             <Toaster />
             {children}
+            <Toaster2 />
           </div>
         </body>
       </html>
