@@ -90,46 +90,11 @@ function FormUi({
     }
   };
 
-  // const handleAddField = async () => {
-  //   const formId = Number(path.split("/")[2]);
-  //   console.log("formId", formId);
-  //   const currentForm = await db
-  //     .select()
-  //     .from(JsonForms)
-  //     .where(eq(JsonForms.id, formId));
-  //   const currentFormFields =
-  //     JSON.parse(await currentForm.jsonform?.formFields) || [];
-
-  //   console.log(`currentForm`, currentForm);
-  //   console.log(`currentFormFields`, currentFormFields);
-
-  //   const newField = {
-  //     fieldName: "firstName",
-  //     fieldType: "text",
-  //     label: "First Name",
-  //     placeholder: "Enter your first name",
-  //     required: true,
-  //   };
-
-  //   const updatedFormFields = [...currentFormFields, newField];
-  //   console.log(`updatedFormFields`, updatedFormFields);
-  //   const res = await db
-  //     .update(JsonForms)
-  //     .set({
-  //       jsonform: {
-  //         ...currentForm.jsonform,
-  //         formFields: updatedFormFields,
-  //       },
-  //     })
-  //     .where(eq(JsonForms.id, formId));
-
-  //   console.log("res", res);
-  // };
   return (
     <form
       ref={(e) => (formRef = e)}
       onSubmit={onFormSubmit}
-      className="my-3 border p-5 md:w-[600px] rounded-lg"
+      className="my-3 border p-5 md:w-[600px] rounded-lg "
       data-theme={selectedTheme}
       style={{
         boxShadow:

@@ -6,6 +6,7 @@ import { useUser } from "@clerk/nextjs";
 import { eq } from "drizzle-orm";
 import { useEffect, useState } from "react";
 import FormResponse from "./_components/FormResponse";
+import ResponseTable from "./view-response/page";
 
 function Responses() {
   const { user } = useUser();
@@ -28,13 +29,22 @@ function Responses() {
       <h2 className="font-bold text-2xl flex items-center justify-between text-white">
         Responses
       </h2>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1  gap-5">
         {forms.map((form, i) => (
-          <FormResponse
-            key={i + form}
-            form={JSON.parse(form.jsonform)}
-            formRecord={form}
-          />
+          <div key={i + form}>
+            <FormResponse
+              key={i + form}
+              form={JSON.parse(form.jsonform)}
+              formRecord={form}
+            />
+            {/* <div className="hidden">
+              <ResponseTable
+                key={i + form}
+                form={JSON.parse(form.jsonform)}
+                formRecord={form}
+              />
+            </div> */}
+          </div>
         ))}
       </div>
     </div>

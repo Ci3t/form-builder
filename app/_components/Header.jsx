@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sheet";
 import SideNav from "../dashboard/_components/SideNav";
 import axios from "axios";
+import { Menu } from "lucide-react";
 const Header = () => {
   const { user, isSignedIn } = useUser();
   const [isPro, setIsPro] = useState(false);
@@ -59,7 +60,7 @@ const Header = () => {
                     size="sm"
                     className="bg-[#472B89] text-white hover:bg-[#FBFCF6] hover:text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px] inline-block "
                   >
-                    Menu
+                    <Menu />
                   </Button>
                 </SheetTrigger>
               </Sheet>

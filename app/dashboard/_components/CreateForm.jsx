@@ -114,7 +114,6 @@ const CreateForm = ({ isPro, className }) => {
       [name]: Number(value),
     });
   };
-  console.log(inputTypes);
 
   return (
     <div>
