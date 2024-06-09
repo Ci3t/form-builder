@@ -146,13 +146,17 @@ function FormResponse({ form, formRecord }) {
           </TableHeader>
           <TableBody>
             {ResData.map((data) => (
-              <TableRow key={data}>
+              <TableRow key={data.id}>
                 {Object.entries(data).map(([key, value]) => (
                   <TableCell
                     key={key}
                     className="px-6 py-4  border-violet-500 border-b text-[#FBFCF6]"
                   >
-                    {value}
+                    {Array.isArray(value) && value.length > 0
+                      ? value.map((item) => item.label).join(", ")
+                      : typeof value === "object"
+                      ? value.label
+                      : value}
                   </TableCell>
                 ))}
               </TableRow>

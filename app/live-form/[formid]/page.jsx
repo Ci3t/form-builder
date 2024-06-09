@@ -27,7 +27,7 @@ function LiveForm({ params }) {
   };
   return (
     <div
-      className="p-10 flex justify-center items-center h-screen"
+      className="p-10 flex justify-center items-center min-h-screen"
       style={{
         backgroundImage: record?.background,
       }}
