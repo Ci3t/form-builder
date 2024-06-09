@@ -69,8 +69,7 @@ function SubForm({ form, formRecord, refreshData }) {
         <RWebShare
           data={{
             text: form?.formSubheading,
-            url:
-              process.env.NEXT_PUBLIC_BASE_URL + "/live-form/" + formRecord?.id,
+            url: "/live-form/" + formRecord?.id,
             title: form?.formTitle,
           }}
           onClick={() => console.log("shared successfully!")}

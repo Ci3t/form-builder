@@ -121,8 +121,7 @@ function EditForm({ params }) {
           <RWebShare
             data={{
               text: jsonForm?.formSubheading,
-              url:
-                process.env.NEXT_PUBLIC_BASE_URL + "/live-form/" + record?.id,
+              url: "/live-form/" + record?.id,
               title: jsonForm?.formTitle,
             }}
             onClick={() => console.log("shared successfully!")}
