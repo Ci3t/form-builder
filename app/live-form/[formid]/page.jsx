@@ -48,7 +48,7 @@ function LiveForm({ params }) {
         href={"/"}
         className="flex justify-center gap-2 items-center px-3 py-1 rounded-full bg-black text-white fixed bottom-5 left-5"
       >
-        <Image src={"/logo.svg"} alt="logo" width={100} height={100} />
+        <Image src={"/logo.png"} alt="logo" width={100} height={100} />
         <br />
         <p> &copy; https://github.com/Ci3t</p>
       </Link>

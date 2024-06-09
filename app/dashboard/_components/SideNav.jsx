@@ -79,11 +79,11 @@ function SideNav({ isPro }) {
         ) : (
           <div className="my-5">
             <Progress value={percentForm} />
-            <h2 className="text-sm mt-2 text-gray-600">
+            <h2 className="text-sm mt-2 text-violet-200">
               <strong>{formList?.length} </strong>Out of <strong>3</strong> File
               Created
             </h2>
-            <h2 className="text-sm mt-2 text-gray-600">
+            <h2 className="text-sm mt-2 text-violet-200">
               Upgrade to Pro for unlimited AI Form
             </h2>
           </div>
