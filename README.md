@@ -20,6 +20,10 @@ Welcome to FormAi, the ultimate solution for creating survey forms effortlessly.
 - **AI Integration**: Gemini AI API
 - **Authentication**: Clerk
 
+## Demo
+
+Check out the live demo of FormAi: [FormAi Demo](https://formai-sandy.vercel.app)
+
 ## Screenshots
 ## Landing Page
 
