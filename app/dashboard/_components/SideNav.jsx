@@ -55,7 +55,7 @@ function SideNav({ isPro }) {
     const percent = ((percentFromDB[0]?.formsCreated || 0) / 3) * 100;
     setPercentForm(percent);
   };
-  console.log(percentForm);
+
   return (
     <div className="h-screen shadow-md border-r border-r-violet-800 shadow-violet-800 bg-[radial-gradient(circle,_#242424_10%,_transparent_11%),radial-gradient(circle_at_bottom_left,_#242424_5%,_transparent_6%),radial-gradient(circle_at_bottom_right,_#242424_5%,_transparent_6%),radial-gradient(circle_at_top_left,_#242424_5%,_transparent_6%),radial-gradient(circle_at_top_right,_#242424_5%,_transparent_6%)] [background-size:1em_1em] bg-[#000000]">
       <div className="absolute top-2/4 left-2/4 w-full bg-[radial-gradient(circle,_rgba(123,_67,_255,_0.6),_transparent_60%)] filter blur-[100px] -translate-x-[70%] -translate-y-[10%] z-0 h-full"></div>

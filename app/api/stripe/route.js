@@ -7,8 +7,6 @@ import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  console.log(process.env.NEXT_PUBLIC_BASE_URL);
-  console.log("1st GET");
   try {
     const { userId } = auth();
     const user = await currentUser();
@@ -61,8 +59,6 @@ export async function GET() {
     });
     return NextResponse.json({ url: stripeSession.url });
   } catch (error) {
-    console.log("2nd Get");
-    console.log("error", error);
     return new NextResponse(error.message || "Internal Server Error", {
       status: 500,
     });

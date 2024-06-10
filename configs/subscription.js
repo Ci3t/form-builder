@@ -7,7 +7,6 @@ export const checkSubscription = async () => {
   try {
     const DAY_IN_MS = 1000 * 60 * 60 * 24;
     const { userId } = await auth();
-    console.log("User ID:", userId); // Log userId
 
     if (!userId) {
       console.log("No userId found");

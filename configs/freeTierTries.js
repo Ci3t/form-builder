@@ -14,8 +14,6 @@ export const checkFormCreationLimit = async (userId) => {
   if (userRecords.length > 0) {
     const userRecord = userRecords[0];
 
-    console.log(userRecord.formsCreated < 3);
-
     return userRecord.formsCreated < 3;
   }
 

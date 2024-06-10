@@ -55,7 +55,7 @@ const CreateForm = ({ isPro, className }) => {
       ${PROMPT2}
     `;
     setLoading(true);
-    console.log("Constructed Prompt:", fullPrompt);
+
     try {
       const result = await AiChatSession.sendMessage(fullPrompt);
 
@@ -68,12 +68,12 @@ const CreateForm = ({ isPro, className }) => {
             createdAt: moment().format("DD/MM/YYYY"),
           })
           .returning({ id: JsonForms.id });
-        console.log(`New form ID ${response[0].id}`);
+
         if (response[0].id) {
           await incrementFormCount(user.id);
           route.push("/edit-form/" + response[0].id);
         }
-        console.log(result.response.text());
+
         setLoading(false);
       }
     } catch (error) {
@@ -108,7 +108,7 @@ const CreateForm = ({ isPro, className }) => {
 
   const handleInputType = (e) => {
     const { name, value } = e.target;
-    console.log(`value`, value);
+
     setInputTypes({
       ...inputTypes,
       [name]: Number(value),
@@ -128,7 +128,7 @@ const CreateForm = ({ isPro, className }) => {
         >
           {!canCreate && !isPro ? "Upgrade" : "Create Form"}
         </Button>
-        <Dialog open={openDialog}>
+        <Dialog on open={openDialog}>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Create new form</DialogTitle>

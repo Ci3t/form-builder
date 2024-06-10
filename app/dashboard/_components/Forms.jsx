@@ -17,7 +17,6 @@ function Forms() {
       .orderBy(desc(JsonForms.id));
 
     setFormList(res);
-    console.log(res);
   };
 
   useEffect(() => {

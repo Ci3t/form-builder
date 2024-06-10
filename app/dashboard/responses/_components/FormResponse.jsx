@@ -31,7 +31,7 @@ function FormResponse({ form, formRecord }) {
       .select()
       .from(userResponses)
       .where(eq(userResponses.formId, formRecord.id));
-    console.log(res);
+
     if (res) {
       res.forEach((response) => {
         const jsonRes = JSON.parse(response.jsonResponse);
@@ -108,7 +108,6 @@ function FormResponse({ form, formRecord }) {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
     XLSX.writeFile(workbook, form?.formTitle + ".xlsx");
-    console.log(`data`, filteredData);
   };
 
   return (

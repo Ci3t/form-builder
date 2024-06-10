@@ -9,7 +9,7 @@ function Sub({ isPro }) {
     try {
       setLoading(true);
       const res = await axios.get("/api/stripe");
-      console.log(res);
+
       window.location.href = res.data.url;
     } catch (error) {
       console.log(error);

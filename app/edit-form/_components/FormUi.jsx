@@ -48,7 +48,7 @@ function FormUi({
     });
   };
   const path = usePathname();
-  console.log(path);
+
   const handleSelectChange = (name, value) => {
     setFormData({
       ...formData,

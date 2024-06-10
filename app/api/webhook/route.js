@@ -6,7 +6,6 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  console.log(process.env.NEXT_PUBLIC_STRIPE_WEBHOOK);
   const body = await req.text();
   const signature = headers().get("Stripe-Signature");
 

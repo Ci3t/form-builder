@@ -20,7 +20,6 @@ function LiveForm({ params }) {
   const [jsonForm, setJsonForm] = useState([]);
   const [isSubmited, setIsSubmited] = useState(false);
   useEffect(() => {
-    console.log(params.formid);
     params && GetFormData();
   }, []);
 
@@ -32,7 +31,6 @@ function LiveForm({ params }) {
 
     setRecord(res[0]);
     setJsonForm(JSON.parse(res[0].jsonform));
-    console.log(res);
   };
   return (
     <div
