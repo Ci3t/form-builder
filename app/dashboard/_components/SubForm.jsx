@@ -38,6 +38,13 @@ function SubForm({ form, formRecord, refreshData }) {
       refreshData();
     }
   };
+  async function copyToClipboard(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+  }
   return (
     <div className="shadow-sm shadow-indigo-400 rounded-lg p-4 bg-[#472B89] h-full w-full  bg-clip-padding backdrop-filter  backdrop-blur bg-opacity-20 backdrop-saturate-50 backdrop-contrast-100 border-[1px] border-violet-300 border-opacity-30">
       <div className="flex justify-between">
@@ -70,12 +77,14 @@ function SubForm({ form, formRecord, refreshData }) {
       <div className="flex justify-between">
         <Button
           onClick={() => {
+            const url = `${window.location.origin}/live-form/${formRecord?.id}`;
+            copyToClipboard(url);
             toast({
-              title: "Please Copy the Link and share it",
+              title: " Link Copied!",
               description: "Opening a new tab...",
             });
             setTimeout(() => {
-              window.open(`/live-form/${formRecord?.id}`, "_blank");
+              window.open(url, "_blank");
             }, 1000);
           }}
           variant="outline"

@@ -38,13 +38,11 @@ function FormResponse({ form, formRecord }) {
         jsonData.push(processResponseData(jsonRes));
       });
       setLoading(false);
-      console.log(`jsonData`, jsonData);
 
       exportToExcel(jsonData);
     }
   };
 
-  console.log(ResData);
   // Define an async function named `getSum` that retrieves the total number of responses for a specific form record
   const getSum = async () => {
     // Execute a database query to select the formId and count of responses for each form record
@@ -80,7 +78,6 @@ function FormResponse({ form, formRecord }) {
     }
   };
 
-  // Function to process the response data
   const processResponseData = (data) => {
     const processedData = {};
     Object.entries(data).forEach(([key, value]) => {

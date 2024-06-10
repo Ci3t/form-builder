@@ -104,6 +104,14 @@ function EditForm({ params }) {
         : [colName] + " Updated!!!"
     );
   };
+
+  async function copyToClipboard(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+  }
   return (
     <div className="p-10">
       <div className="flex justify-between items-center">
@@ -122,12 +130,14 @@ function EditForm({ params }) {
 
           <Button
             onClick={() => {
+              const url = `${window.location.origin}/live-form/${record?.id}`;
+              copyToClipboard(url);
               toast({
-                title: "Please Copy the Link and share it",
+                title: "Link Copied!",
                 description: "Opening a new tab...",
               });
               setTimeout(() => {
-                window.open(`/live-form/${record?.id}`, "_blank");
+                window.open(url, "_blank");
               }, 1000);
             }}
             className="flex gap-2 hover:bg-[#472B89] hover:text-white
