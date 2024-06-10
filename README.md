@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FormAi – AI-Powered Form Builder
 
-## Getting Started
+Welcome to FormAi, the ultimate solution for creating survey forms effortlessly. Simply log in, describe your survey needs to our AI, and receive fully functional form code ready to use. Save time and enhance your productivity with our innovative tool.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Create Forms Effortlessly**: Generate custom forms with AI assistance.
+- **User Authentication**: Secure login and registration system using Clerk for seamless user management.
+- **Simple Form Builder**: Intuitive interface for creating forms by prompting AI to generate fields automatically or specifying the number of input types.
+- **Form Management**: Edit, delete, and manage your forms.
+- **Submission Handling**: Collect and view form submissions.
+- **Customizable Themes**: Customize themes, borders, and backgrounds to match your branding.
+- **Data Export**: Export form responses for further analysis.
+- **Integration with Gemini AI**: Leverage advanced AI capabilities to enhance form creation and management.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Fullstack**: Next.js, Tailwind CSS, Shadcn-UI, Lucide-React, Stripe, Daisy-UI
+- **Database**: Drizzle ORM with PostgreSQL
+- **AI Integration**: Gemini AI API
+- **Authentication**: Clerk
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Screenshots
+## Landing Page
 
-## Learn More
+![Landing Page UI](/public/gitscreenshot/S1.png)
 
-To learn more about Next.js, take a look at the following resources:
+## Create
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![Create](/public/gitscreenshot/S6.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Dashboard
 
-## Deploy on Vercel
+![Dashboard](/public/gitscreenshot/S2.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Responses Page
+![Form Builder Interface](/public/gitscreenshot/S3.png)
+## Editor Page
+![Form Builder Interface](/public/gitscreenshot/S4.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## live share
+![Form Builder Interface](/public/gitscreenshot/S5.png)
+
+
+
+
+## Usage
+
+1. **Register and log in** to access the form builder.
+2. **Create a new form** by clicking "Create Form" in the modal, providing a prompt, and specifying how many input types you want or leaving it empty for auto-generation.
+3. **Save and manage your forms** from the dashboard.
+4. **Collect submissions** and view them in the submissions section, then export them to an Excel sheet.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- Special thanks to the team at Gemini AI for their support.
+
+---
