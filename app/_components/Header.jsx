@@ -34,70 +34,72 @@ const Header = () => {
 
     checkSubscriptionStatus();
   }, []);
-  console.log(path);
+
   return (
-    <div
-      className={` ${
-        path.includes("/dashboard") &&
-        " sticky top-0 z-50 bg-[radial-gradient(circle,_#242424_10%,_transparent_11%),radial-gradient(circle_at_bottom_left,_#242424_5%,_transparent_6%),radial-gradient(circle_at_bottom_right,_#242424_5%,_transparent_6%),radial-gradient(circle_at_top_left,_#242424_5%,_transparent_6%),radial-gradient(circle_at_top_right,_#242424_5%,_transparent_6%)] [background-size:1em_1em] bg-[#000000]"
-      }`}
-    >
-      {path.includes("/dashboard") && (
-        <div className="absolute top-2/4 left-2/4 w-full bg-[radial-gradient(circle,_rgba(123,_67,_255,_0.6),_transparent_60%)] filter blur-[100px] -translate-x-[70%] -translate-y-[50%] z-0 h-full"></div>
-      )}
-      <div className="p-5 border-b border-b-violet-950 ">
-        <div className="flex items-center justify-between">
-          <Link className="w-[120px] md:w-[180px] mr-2" href={"/"}>
-            <Image
-              src={"/logo.png"}
-              width={180}
-              height={50}
-              alt="logo"
-              className="md:drop-shadow-[2px_0px_0px_rgba(112,73,205,1)] "
-            />
-          </Link>
+    !path.includes("live-form") && (
+      <div
+        className={` ${
+          path.includes("/dashboard") &&
+          " sticky top-0 z-50 bg-[radial-gradient(circle,_#242424_10%,_transparent_11%),radial-gradient(circle_at_bottom_left,_#242424_5%,_transparent_6%),radial-gradient(circle_at_bottom_right,_#242424_5%,_transparent_6%),radial-gradient(circle_at_top_left,_#242424_5%,_transparent_6%),radial-gradient(circle_at_top_right,_#242424_5%,_transparent_6%)] [background-size:1em_1em] bg-[#000000]"
+        }`}
+      >
+        {path.includes("/dashboard") && (
+          <div className="absolute top-2/4 left-2/4 w-full bg-[radial-gradient(circle,_rgba(123,_67,_255,_0.6),_transparent_60%)] filter blur-[100px] -translate-x-[70%] -translate-y-[50%] z-0 h-full"></div>
+        )}
+        <div className="p-5 border-b border-b-violet-950 ">
+          <div className="flex items-center justify-between">
+            <Link className="w-[120px] md:w-[180px] mr-2" href={"/"}>
+              <Image
+                src={"/logo.png"}
+                width={180}
+                height={50}
+                alt="logo"
+                className="md:drop-shadow-[2px_0px_0px_rgba(112,73,205,1)] "
+              />
+            </Link>
 
-          {isSignedIn ? (
-            <div className="flex items-center gap-5">
-              <Sheet>
-                <SheetContent className="p-0 text-white">
-                  <SideNav isPro={isPro} />
-                </SheetContent>
+            {isSignedIn ? (
+              <div className="flex items-center gap-5">
+                <Sheet>
+                  <SheetContent className="p-0 text-white">
+                    <SideNav isPro={isPro} />
+                  </SheetContent>
 
-                <SheetTrigger className="md:hidden">
+                  <SheetTrigger className="md:hidden">
+                    <Button
+                      size="sm"
+                      className="bg-[#472B89] text-white hover:bg-[#FBFCF6] hover:text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px] inline-block "
+                    >
+                      <Menu />
+                    </Button>
+                  </SheetTrigger>
+                </Sheet>
+
+                <Link href={"/dashboard"}>
                   <Button
                     size="sm"
-                    className="bg-[#472B89] text-white hover:bg-[#FBFCF6] hover:text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px] inline-block "
+                    className="bg-[#472B89]  text-white hover:bg-[#FBFCF6] hover:text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px]  "
                   >
-                    <Menu />
+                    Dashaboard
                   </Button>
-                </SheetTrigger>
-              </Sheet>
+                </Link>
 
-              <Link href={"/dashboard"}>
+                <UserButton />
+              </div>
+            ) : (
+              <SignInButton>
                 <Button
+                  className="bg-[#472B89]  text-white hover:bg-[#FBFCF6] hover:text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px] "
                   size="sm"
-                  className="bg-[#472B89]  text-white hover:bg-[#FBFCF6] hover:text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px]  "
                 >
-                  Dashaboard
+                  Get Started
                 </Button>
-              </Link>
-
-              <UserButton />
-            </div>
-          ) : (
-            <SignInButton>
-              <Button
-                className="bg-[#472B89]  text-white hover:bg-[#FBFCF6] hover:text-[#472B89] hover:border-2 hover:border-[#472B89] border-transparent border-[2px] "
-                size="sm"
-              >
-                Get Started
-              </Button>
-            </SignInButton>
-          )}
+              </SignInButton>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    )
   );
 };
 
