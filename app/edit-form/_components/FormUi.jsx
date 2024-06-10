@@ -31,8 +31,10 @@ function FormUi({
   editable = true,
   formId = 0,
   enableSignIn = false,
+  setIsSubmited,
 }) {
   const [formData, setFormData] = useState();
+
   const { user, isSignedIn } = useUser();
 
   let formRef = useRef();
@@ -84,6 +86,8 @@ function FormUi({
 
     if (res) {
       toast("Form Submitted Successfully");
+      setIsSubmited(true);
+
       formRef.reset();
     } else {
       toast("Error while saving your form");
@@ -94,8 +98,10 @@ function FormUi({
     <form
       ref={(e) => (formRef = e)}
       onSubmit={onFormSubmit}
-      className="my-3 border p-5 md:w-[600px] rounded-lg "
-      data-theme={selectedTheme}
+      className={`my-3 border p-5 md:w-[600px] rounded-lg ${
+        !selectedTheme && "bg-white"
+      }`}
+      data-theme={selectedTheme == null ? null : selectedTheme}
       style={{
         boxShadow:
           selectedBorder?.key == selectedBorder?.key && selectedBorder?.value,
@@ -210,12 +216,6 @@ function FormUi({
             <SignInButton mode="modal">Sign In before Submit</SignInButton>
           </Button>
         )}
-
-        {/* {path.includes("/edit-form") && (
-          <button onClick={handleAddField} className="btn btn-secondary">
-            Add
-          </button>
-        )} */}
       </div>
     </form>
   );

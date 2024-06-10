@@ -35,7 +35,7 @@ function FormResponse({ form, formRecord }) {
     if (res) {
       res.forEach((response) => {
         const jsonRes = JSON.parse(response.jsonResponse);
-        jsonData.push(jsonRes);
+        jsonData.push(processResponseData(jsonRes));
       });
       setLoading(false);
       console.log(`jsonData`, jsonData);
@@ -80,21 +80,24 @@ function FormResponse({ form, formRecord }) {
     }
   };
 
-  // const getResponseData = async (formId) => {
-  //   const resData = await db
-  //     .select({ jsonResponse: userResponses.jsonResponse })
-  //     .from(userResponses)
-  //     .where(eq(userResponses.formId, formId))
-  //     .execute();
-
-  //   const res = resData
-  //     .map((response) =>
-  //       response.jsonResponse ? JSON.parse(response.jsonResponse) : null
-  //     )
-  //     .filter((data) => data !== null);
-
-  //   setResData(res);
-  // };
+  // Function to process the response data
+  const processResponseData = (data) => {
+    const processedData = {};
+    Object.entries(data).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        processedData[key] = value.map((item) => item.label).join(", ");
+      } else if (
+        typeof value === "object" &&
+        value !== null &&
+        "label" in value
+      ) {
+        processedData[key] = value.label;
+      } else {
+        processedData[key] = value;
+      }
+    });
+    return processedData;
+  };
 
   useEffect(() => {
     user && getSum();
@@ -111,22 +114,6 @@ function FormResponse({ form, formRecord }) {
     console.log(`data`, filteredData);
   };
 
-  // {ResData.map((data) => (
-  //   <TableRow key={data.id}>
-  //     {Object.entries(data).map(([key, value]) => (
-  //       <TableCell
-  //         key={key}
-  //         className="px-6 py-4  border-violet-500 border-b text-[#FBFCF6]"
-  //       >
-  //         {Array.isArray(value) && value.length > 0
-  //           ? value.map((item) => item.label).join(", ")
-  //           : typeof value === "object"
-  //           ? value.label
-  //           : value}
-  //       </TableCell>
-  //     ))}
-  //   </TableRow>
-  // ))}
   return (
     <div className="shadow-sm shadow-indigo-400 rounded-lg p-4 bg-[#472B89] h-full w-full  bg-clip-padding backdrop-filter  backdrop-blur bg-opacity-20 backdrop-saturate-50 backdrop-contrast-100 border-[1px] border-violet-300 border-opacity-30 my-5">
       <h2 className="text-lg text-[#FBFCF6]">{form?.formTitle}</h2>

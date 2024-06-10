@@ -1,5 +1,8 @@
 export default [
   {
+    theme: null,
+  },
+  {
     "color-scheme": "dark",
     primary: "#09ecf3",
     "primary-content": "#005355",

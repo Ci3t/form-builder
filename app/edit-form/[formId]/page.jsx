@@ -14,7 +14,7 @@ import Controller from "../_components/Controller";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useToast } from "@/components/ui/use-toast";
-
+import { toast as sonner } from "sonner";
 function EditForm({ params }) {
   const { user } = useUser();
   const [jsonForm, setJsonForm] = useState([]);
@@ -77,7 +77,7 @@ function EditForm({ params }) {
           eq(JsonForms.createdBy, user?.primaryEmailAddress?.emailAddress)
         )
       );
-    toast("Updated!!!");
+    sonner("Updated!!!!!");
   };
 
   const deleteField = (indexToRemove) => {
@@ -98,9 +98,9 @@ function EditForm({ params }) {
           eq(JsonForms.createdBy, user?.primaryEmailAddress?.emailAddress)
         )
       );
-    toast(
+    sonner(
       [colName] == "enableSignIn"
-        ? "Authentication Enabled"
+        ? "Authentication Updated!"
         : [colName] + " Updated!!!"
     );
   };

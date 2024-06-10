@@ -6,10 +6,19 @@ import { eq } from "drizzle-orm";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 function LiveForm({ params }) {
   const [record, setRecord] = useState();
   const [jsonForm, setJsonForm] = useState([]);
+  const [isSubmited, setIsSubmited] = useState(false);
   useEffect(() => {
     console.log(params.formid);
     params && GetFormData();
@@ -32,17 +41,29 @@ function LiveForm({ params }) {
         backgroundImage: record?.background,
       }}
     >
-      {record && (
-        <FormUi
-          jsonform={jsonForm}
-          onFieldUpdate={() => console.log()}
-          deleteField={() => console.log()}
-          selectedBorder={JSON.parse(record?.style)}
-          selectedTheme={record?.theme}
-          editable={false}
-          formId={record?.id}
-          enableSignIn={record?.enableSignIn}
-        />
+      {isSubmited ? (
+        <Card className="shadow-sm shadow-indigo-400 rounded-lg p-4 bg-[#472B89] h-full bg-clip-padding backdrop-filter  backdrop-blur bg-opacity-40 backdrop-saturate-50 backdrop-contrast-100 border-[1px] border-violet-300 border-opacity-30 text-[#FBFCF6]">
+          <CardHeader>
+            <CardTitle>Form Submitted!🎉</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>Thank you for submitting!✨</p>
+          </CardContent>
+        </Card>
+      ) : (
+        record && (
+          <FormUi
+            jsonform={jsonForm}
+            onFieldUpdate={() => console.log()}
+            deleteField={() => console.log()}
+            selectedBorder={JSON.parse(record?.style)}
+            selectedTheme={record?.theme}
+            editable={false}
+            formId={record?.id}
+            enableSignIn={record?.enableSignIn}
+            setIsSubmited={setIsSubmited}
+          />
+        )
       )}
       <Link
         href={"/"}

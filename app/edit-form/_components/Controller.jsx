@@ -52,7 +52,7 @@ function Controller({
                     style={{ backgroundColor: theme.neutral }}
                   ></div>
                 </div>
-                {theme.theme}
+                {theme.theme == null ? "None" : theme.theme}
               </div>
             </SelectItem>
           ))}
